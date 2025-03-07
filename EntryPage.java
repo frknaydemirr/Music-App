@@ -8,9 +8,9 @@ public class EntryPage extends JFrame {
 
     public EntryPage(){
 
-        setTitle("Giriş Sayfası"); // Başlık ekleyin
-        setSize(550, 800); // Pencerenin boyutunu belirle
-        setLocationRelativeTo(null); // Ekranın ortasına al
+        setTitle("Giriş Sayfası");
+        setSize(550, 800);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = new JPanel();
         contentPane.setLayout(null);
@@ -18,12 +18,12 @@ public class EntryPage extends JFrame {
         contentPane.setSize(550,800);
 
 
-        // 2. JLabel oluştur ve panele ekle
+
         First = new JLabel("Hoşgeldiniz");
-        First.setBounds(50, 50, 100, 30);  // Konum ve boyut (x, y, genişlik, yükseklik)
+        First.setBounds(50, 50, 100, 30);
         contentPane.add(First);
 
-        // 3. JTextField oluştur ve panele ekle
+
         textField1 = new JTextField();
         textField1.setBounds(50, 100, 200, 30);
         contentPane.add(textField1);
