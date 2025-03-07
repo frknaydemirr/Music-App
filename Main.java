@@ -7,7 +7,7 @@ public class Main {
 
         Connection conn = DataConnection.connect();
         DataConnection.ReadData();
-
+        new EntryPage();
 
     }
 }
