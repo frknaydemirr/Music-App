@@ -37,7 +37,7 @@ public class DataConnection {
             ResultSet rs= stmt.executeQuery("select * from TblKullanıcı");
             ResultSetMetaData rsmd = rs.getMetaData();
                 System.out.printf("%-10s %-20s %-30s %-20s %-10s %-10s%n",
-                        "UserID", "UserName", "Email", "Password", "CountryID", "AbonelikID");
+                        "UserID", "UserName", "Email", "Password", "CountryID", "MemberID");
                 System.out.println("---------------------------------------------------------------------------------------------");
 
                 while (rs.next()) {
