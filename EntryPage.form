@@ -1,34 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="EntryPage">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1255" height="786"/>
+      <xy x="20" y="20" width="1095" height="764"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-16250872"/>
+      <name value=""/>
+    </properties>
     <border type="none"/>
     <children>
-      <vspacer id="48c1d">
+      <hspacer id="1186f">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
-      <component id="6168c" class="javax.swing.JLabel" binding="First">
+      </hspacer>
+      <hspacer id="a55da">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="5aac8" class="javax.swing.JButton" binding="preminyumGirişiButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Hoşgekdiniz"/>
+          <background color="-15000029"/>
+          <font name="Consolas" size="16" style="1"/>
+          <text value="Preminyum Girişi"/>
         </properties>
       </component>
-      <component id="5c6a4" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="89913" class="javax.swing.JButton" binding="kullanıcıGirişiButton" default-binding="true">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-13629947"/>
+          <background color="-15000029"/>
+          <font name="Consolas" size="16" style="1"/>
+          <text value="Kullanıcı Girişi"/>
+        </properties>
+      </component>
+      <component id="46fb1" class="javax.swing.JButton" binding="adminOlarakDevamEtButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-15000029"/>
+          <font name="Consolas" size="16" style="1"/>
+          <label value="Admin Olarak Devam Et"/>
+          <text value="Admin Olarak Devam Et"/>
+        </properties>
+      </component>
+      <component id="7d7ac" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Consolas" size="20" style="1"/>
+          <text value="Music App'a Giriş"/>
+        </properties>
+      </component>
+      <component id="8f720" class="javax.swing.JButton" binding="kayıtOlButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-15000029"/>
+          <font name="Consolas" size="16" style="1"/>
+          <text value="Kayıt Ol"/>
+        </properties>
+      </component>
+      <component id="b70d1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Consolas" size="16" style="1"/>
+          <text value="Henüz hesabın yok mu Hemen Kayıt Ol"/>
         </properties>
       </component>
     </children>

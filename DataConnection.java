@@ -10,21 +10,22 @@ public class DataConnection {
     private static final String PASSWORD = "12345";
     private static Connection conn;
 
-    public static Connection connect(){
-        try{
-            conn= DriverManager.getConnection(DB_URL,USER,PASSWORD);
+    public static Connection connect() {
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             System.out.println("The Connection connected succesfuly ! ");
             return conn;
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("The Connection connected failed ! ");
             e.printStackTrace();
             return null;
         }
 
     }
-    public static void ReadData(){
-        if(conn == null){
+
+    public static void ReadData() {
+        if (conn == null) {
             System.out.println("The connection could not be established ! ");
             System.out.println("Trying to connect!");
             connect();
@@ -34,8 +35,8 @@ public class DataConnection {
             try {
                 Statement stmt = conn.createStatement();
                 //meta info
-            ResultSet rs= stmt.executeQuery("select * from TblKullanıcı");
-            ResultSetMetaData rsmd = rs.getMetaData();
+                ResultSet rs = stmt.executeQuery("select * from TblKullanıcı");
+                ResultSetMetaData rsmd = rs.getMetaData();
                 System.out.printf("%-10s %-20s %-30s %-20s %-10s %-10s%n",
                         "UserID", "UserName", "Email", "Password", "CountryID", "MemberID");
                 System.out.println("---------------------------------------------------------------------------------------------");
@@ -54,8 +55,29 @@ public class DataConnection {
             System.out.println("Connection is still null, cannot create statement.");
         }
     }
+}
 
-    }
+//    public static void MemberInsert(){
+//        if(conn == null){
+//            System.out.println("The connection could not be established ! ");
+//            System.out.println("Trying to connect!");
+//            connect();
+//        }
+//        if(conn != null){
+//            try{
+//                Statement st=conn.createStatement();
+//                String sql="INSERT  INTO  TblKullanıcı ()"
+//
+//            }
+//            catch(SQLException e){
+//                System.out.println("Error while creating statement!");
+//                e.printStackTrace();
+//            }
+//
+//        }
+//    }
+//
+//    }
 
 
 

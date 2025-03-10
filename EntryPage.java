@@ -1,41 +1,55 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class EntryPage extends JFrame {
-    private JPanel contentPane;
-    private JLabel First;
-    private JTextField textField1;
+public class EntryPage  extends  JFrame {
 
+    private JPanel MainPanel;
+    private JButton preminyumGirişiButton;
+    private JButton kullanıcıGirişiButton;
+    private JButton adminOlarakDevamEtButton;
+    private JButton kayıtOlButton;
 
-    public EntryPage(){
-
-        setTitle("Giriş Sayfası");
-        setSize(550, 800);
-        setLocationRelativeTo(null);
+    public EntryPage() {
+        add(MainPanel);
+        setTitle("EntryPage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        contentPane = new JPanel();
-        contentPane.setLayout(null);
-        setContentPane(contentPane);
-        contentPane.setSize(550,800);
+        setSize(750, 800);
 
 
+        //admin girişi;
+        adminOlarakDevamEtButton.addActionListener(e-> {
+            System.out.println("Hello World!");
+            //admin giriş paneli;
+            dispose();
 
-        First = new JLabel("Hoşgeldiniz");
-        First.setBounds(50, 50, 100, 30);
-        contentPane.add(First);
+        });
 
 
-        textField1 = new JTextField();
-        textField1.setBounds(50, 100, 200, 30);
-        contentPane.add(textField1);
+        //kullanıcı girişi;
+        kullanıcıGirişiButton.addActionListener(e-> {
+            System.out.println("Kullanıcı Giriş Yapıyor!");
+            UserEntryPage userEntryPage = new UserEntryPage(); //-> open user ;
+            dispose();
 
-        setVisible(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        });
+        //preminyum giriş:
+    preminyumGirişiButton.addActionListener(e-> {
+        System.out.println("Preminyum giriş");
+        PreminyumEntryPage pe=new PreminyumEntryPage();
+        dispose();
+
+    });
+
+    //kayit ol
+        kayıtOlButton.addActionListener(e-> {
+            System.out.println("Kayıt olma...");
+            new RegisterPage();
+            dispose();
+        });
+
     }
-    public static  void main(String[] args){
-        new EntryPage();
+    public static void main(String[] args) {
+//        new EntryPage().setVisible(true);
     }
-
-
-
 }
