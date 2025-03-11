@@ -35,6 +35,8 @@ public class SarkiDAO {
         }
     }
 }
+
+//Update with modal class ->Error??
 public static void UpdateSarkı(TblSarkı sarki){
     java.sql.Date sqlDate = java.sql.Date.valueOf(sarki.getTarih());
     Connection conn = DataConnection.connect();
@@ -59,3 +61,6 @@ public static void UpdateSarkı(TblSarkı sarki){
         e.printStackTrace();
     }
 }
+
+
+//Delete with model Class ?

@@ -5,6 +5,8 @@ import com.example.musicapp.model.TblAbonelik;
 import com.example.musicapp.model.TblAlbum;
 
 
+
+
 //tbl kullanıcı model sınıfını içeri aktardık!!!
 
 import javax.swing.*;
@@ -55,17 +57,24 @@ public class Main {
 
         // Kullanıcıyı güncelle
 //        KullaniciDAO.updateUser(kullanici);
-        TblSarkı sarki= new TblSarkı();
-        SarkiDAO sarkidao = new SarkiDAO();
-        sarki.setSarkıAd("Yeniden");
-        sarki.setSure(10);
-        sarki.setDinlenmeSayi(1200);
-        sarki.setTarih(LocalDate.parse("2020-05-05"));
-        //foreign key set etme;
+//        TblSarkı sarki= new TblSarkı();
+//        SarkiDAO sarkidao = new SarkiDAO();
+//        sarki.setSarkıAd("Yeniden");
+//        sarki.setSure(10);
+//        sarki.setDinlenmeSayi(1200);
+//        sarki.setTarih(LocalDate.parse("2020-05-05"));
+//        //foreign key set etme;
+//        TblAlbum album = new TblAlbum();
+//        album.setId(1);
+//        sarki.setAlbum(album);
+//        SarkiDAO.CreateSong(sarki);
         TblAlbum album = new TblAlbum();
-        album.setId(1);
-        sarki.setAlbum(album);
-        SarkiDAO.CreateSong(sarki);
+        AlbumDAO albumdao = new AlbumDAO();
+        album.setAlbumAd("kaç kadeh kırıldı");
+        album.setTur("Acıklı");
+        album.setTarih(LocalDate.parse("2025-11-03"));
+        albumdao.CreateAlbum(album);
+
 
 
 
