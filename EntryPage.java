@@ -15,6 +15,7 @@ public class EntryPage  extends  JFrame {
         setTitle("EntryPage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(750, 800);
+        setVisible(true);
 
 
         //admin girişi;

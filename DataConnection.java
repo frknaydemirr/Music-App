@@ -57,27 +57,7 @@ public class DataConnection {
     }
 }
 
-//    public static void MemberInsert(){
-//        if(conn == null){
-//            System.out.println("The connection could not be established ! ");
-//            System.out.println("Trying to connect!");
-//            connect();
-//        }
-//        if(conn != null){
-//            try{
-//                Statement st=conn.createStatement();
-//                String sql="INSERT  INTO  TblKullanıcı ()"
-//
-//            }
-//            catch(SQLException e){
-//                System.out.println("Error while creating statement!");
-//                e.printStackTrace();
-//            }
-//
-//        }
-//    }
-//
-//    }
+
 
 
 
