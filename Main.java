@@ -57,25 +57,43 @@ public class Main {
 
         // Kullanıcıyı güncelle
 //        KullaniciDAO.updateUser(kullanici);
-//        TblSarkı sarki= new TblSarkı();
-//        SarkiDAO sarkidao = new SarkiDAO();
-//        sarki.setSarkıAd("Yeniden");
-//        sarki.setSure(10);
-//        sarki.setDinlenmeSayi(1200);
-//        sarki.setTarih(LocalDate.parse("2020-05-05"));
+//
 //        //foreign key set etme;
 //        TblAlbum album = new TblAlbum();
 //        album.setId(1);
 //        sarki.setAlbum(album);
 //        SarkiDAO.CreateSong(sarki);
-        TblAlbum album = new TblAlbum();
-        AlbumDAO albumdao = new AlbumDAO();
-        album.setAlbumAd("kaç kadeh kırıldı");
-        album.setTur("Acıklı");
-        album.setTarih(LocalDate.parse("2025-11-03"));
-        albumdao.CreateAlbum(album);
+//        TblAlbum album = new TblAlbum();
+//        AlbumDAO albumdao = new AlbumDAO();
+//        album.setAlbumAd("kaç kadeh kırıldı");
+//        album.setTur("Acıklı");
+//        album.setTarih(LocalDate.parse("2025-11-03"));
+//        albumdao.CreateAlbum(album);
 
 
+
+//        TblSarkı sarki= new TblSarkı();
+//        SarkiDAO sarkidao = new SarkiDAO();
+//        sarki.setSarkıAd("Ay");
+//        sarki.setSure(8);
+//        sarki.setDinlenmeSayi(200);
+//       sarki.setTarih(LocalDate.parse("2020-05-05"));
+//       TblAlbum album = new TblAlbum();
+//       album.setId(1);
+//       sarki.setAlbum(album);
+//       sarkidao.CreateSong(sarki);
+//        TblAlbum album = new TblAlbum();
+//        album.setId(6);
+//        AlbumDAO albumDAO = new AlbumDAO();
+//        albumDAO.DeleteAlbum(album);
+        //update -> try : -> succes
+//        TblAlbum album = new TblAlbum();
+//        album.setId(5);
+//        album.setTur("Rap");
+//        album.setAlbumAd("Çoşma Kopma");
+//        album.setTarih(LocalDate.parse("2020-05-05"));
+//        AlbumDAO dao = new AlbumDAO();
+//        dao.UpdateAlbum(album);
 
 
 

@@ -3,12 +3,18 @@ import com.example.musicapp.model.TblSarkı;
 import  java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 
+//Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
+//yapabilecektir
+
 public class AlbumDAO {
-//create album
+
+
+        //CREATE album
         public static void CreateAlbum(TblAlbum album){
             Connection conn = DataConnection.connect();
             java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih()); //localdate türünde olduğu için;
@@ -30,10 +36,60 @@ public class AlbumDAO {
 
             }
         }
+
+
+
+       //DELETE album with model Class -> album de foreign key yok silme işlemi basit;
+        public static void DeleteAlbum(TblAlbum album){
+            Connection conn = DataConnection.connect();
+            if (conn == null) {
+                System.out.println("The Connection connected failed ! ");
+                return;
+            }
+            String sql = "DELETE FROM TblAlbum WHERE AlbumID = ?";
+            try {
+                PreparedStatement ps=conn.prepareStatement(sql);
+                ps.setInt(1, album.getId());
+                ps.executeUpdate();
+                System.out.println("The Album have been deleted!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    //update album with model Class -> NO FOREIGN KEY
+
+    public static void UpdateAlbum(TblAlbum album){
+        java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih());
+        //lokal date-> sqldate e dönüştü;
+            Connection conn = DataConnection.connect();
+            if (conn == null) {
+                System.out.println("The Connection connected failed ! ");
+                return;
+            }
+            String sql= "UPDATE TblAlbum SET AlbumAd = ?,  Tarih = ? ,Tur = ? WHERE AlbumID = ?";
+            try {
+                PreparedStatement ps= conn.prepareStatement(sql);
+                ps.setString(1, album.getAlbumAd());
+                ps.setDate(2, sqlDate);
+                ps.setString(3, album.getTur());
+                ps.setInt(4, album.getId());
+                ps.executeUpdate();
+                System.out.println("The Album have been updated!");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 
 
-//delete album with model Class
+    //DELETE Album:
 
 
-//update album with model Class
+    }
+
+
+
+
+
+

@@ -1,14 +1,23 @@
 import com.example.musicapp.model.TblSarkı;
 import  java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.ResultSet;
+
+
+
+//Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
+//yapabilecektir
 
 
 //sarkının olayı->şarkı ekleyebilir; silebilir ve güncelleyebilir!
 public class SarkiDAO {
     //model class->TblSarkı;
 
+
+    //CREATE
     public static void CreateSong(TblSarkı sarkı) {
         java.sql.Date sqlDate = java.sql.Date.valueOf(sarkı.getTarih());
         //lokal date-> sqldate e dönüştü;
@@ -34,33 +43,81 @@ public class SarkiDAO {
 
         }
     }
-}
+    //UPDATE with modal class
+    public static void UpdateSarkı(TblSarkı sarki){
+        java.sql.Date sqlDate = java.sql.Date.valueOf(sarki.getTarih());
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("The Connection connected failed ! ");
+            return;
+        }
+        String sql="UPDATE TblSarkı SET SarkıAd = ? Tarih  = ? sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
+        try {
+            //primary key -> de güncellemeye dahil!
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ps.setString(1,sarki.getSarkıAd());
+            ps.setDate(2,sqlDate);
+            ps.setInt(3,sarki.getSure());
+            ps.setInt(4,sarki.getDinlenmeSayi());
+            ps.setInt(5,sarki.getAlbum().getId());
+            ps.setInt(6,sarki.getId());
+            ps.executeUpdate();
 
-//Update with modal class ->Error??
-public static void UpdateSarkı(TblSarkı sarki){
-    java.sql.Date sqlDate = java.sql.Date.valueOf(sarki.getTarih());
-    Connection conn = DataConnection.connect();
-    if (conn == null) {
-        System.out.println("The Connection connected failed ! ");
-        return;
+        } catch (Exception e) {
+            System.out.println("Hata");
+            e.printStackTrace();
+        }
     }
-    String sql="UPDATE TblSarkı SET SarkıAd = ? Tarih  = ? sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
-    try {
-        //primary key -> de güncellemeye dahil!
-        PreparedStatement ps= conn.prepareStatement();
-        ps.setString(1,sarki.getSarkıAd());
-        ps.setDate(2,sqlDate);
-        ps.setInt(3,sarki.getSure());
-        ps.setInt(4,sarki.getDinlenmeSayi());
-        ps.setInt(5,sarki.getAlbum().getId());
-        ps.setInt(6,sarki.getId());
-        ps.executeUpdate();
 
-    } catch (Exception e) {
-        System.out.println("Hata");
-        e.printStackTrace();
+
+    //DELETE -> sarkı da albumün primary key-> foreign key var kontrollü silme !!!
+    public static void DeleteSarkı(TblSarkı sarki) {
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("The Connection connected failed!");
+            return;
+        }
+
+        try {
+            //  bu şarkıya bağlı albümü
+            String albumQuery = "SELECT COUNT(*) FROM TblSarkı WHERE AlbumID = ?";
+            PreparedStatement psCheckAlbum = conn.prepareStatement(albumQuery);
+            psCheckAlbum.setInt(1, sarki.getAlbum().getId());
+            ResultSet rs = psCheckAlbum.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 1) {
+                //  aynı albüme ait başka şarkılar varsa
+                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+                PreparedStatement psDeleteSong = conn.prepareStatement(sql);
+                psDeleteSong.setInt(1, sarki.getId());
+                psDeleteSong.executeUpdate();
+                System.out.println("Song deleted successfully!");
+            } else {
+                // Eğer albüme bağlı başka şarkılar yoksa, albümün de silinmesi .
+                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+                PreparedStatement psDeleteSong = conn.prepareStatement(sql);
+                psDeleteSong.setInt(1, sarki.getId());
+                psDeleteSong.executeUpdate();
+
+                System.out.println("Song   deleted successfully!");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while deleting the song!");
+            e.printStackTrace();
+        }
     }
-}
+    }
 
 
-//Delete with model Class ?
+
+
+
+
+
+
+
+
+
+
+
+
