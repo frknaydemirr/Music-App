@@ -110,8 +110,9 @@ return albumList;
 
     }
 
-
-
+//album silinince,güncellenince,create edilince otomatikman bağlantılı olduğu tablo  -> TblSarkı da da aynı işlemler ytapulır
+//1(albumıd)	Efkarlanma	2020-12-12	Acıklı -> 1 numaralı album kategorisini kaldırınca şarkının ait oldupu albüm gidinec şlarkı da gider!
+//6	Honur me	2012-09-23	10	1	1(albumId)
 
 
 

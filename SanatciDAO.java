@@ -83,7 +83,7 @@ public class SanatciDAO {
 
 
     //READ-> arraylistte sanatçıları tutup okuma işlemi; -> bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size(boyut) la kontrol başarılı bir şekilde sağlanıyor;
-    READ -> hata var;
+//    READ -> hata var;
     public ArrayList<TblSanatcı> getSanatcilar() {
         ArrayList<TblSanatcı>sanatcilar=new ArrayList<>();
         Connection conn = DataConnection.connect();
