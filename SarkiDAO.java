@@ -56,7 +56,7 @@ public class SarkiDAO {
             ps.setDate(2,sqlDate);
             ps.setInt(3,sarki.getSure());
             ps.setInt(4,sarki.getDinlenmeSayi());
-            ps.setInt(5,sarki.getAlbum().getId());
+            ps.setInt(5,sarki.getAlbum().getId()); //albumID -> foreign key -> Tblalbum den album alıyor-> getAlbum();  -> albumId mevcut;!
             ps.setInt(6,sarki.getId());
             ps.executeUpdate();
 
@@ -105,7 +105,7 @@ public class SarkiDAO {
     }
 
 
-    //READ -> hata var;
+//    READ -> hata var;
     public ArrayList<TblSarkı>getSarki(){
         ArrayList<TblSarkı>Sarki=new ArrayList<>();
        Connection conn = DataConnection.connect();

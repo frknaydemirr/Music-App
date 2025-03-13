@@ -17,6 +17,9 @@ public class TblSanatcı {
     @JoinColumn(name = "UlkeID")
     private com.example.musicapp.model.TblUlke ulkeID;
 
+
+
+
     public Integer getId() {
         return id;
     }

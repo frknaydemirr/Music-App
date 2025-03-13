@@ -1,10 +1,4 @@
-import com.example.musicapp.model.TblKullanıcı;
-import com.example.musicapp.model.TblSarkı;
-import com.example.musicapp.model.TblUlke;
-import com.example.musicapp.model.TblAbonelik;
-import com.example.musicapp.model.TblAlbum;
-
-
+import com.example.musicapp.model.*;
 
 
 //tbl kullanıcı model sınıfını içeri aktardık!!!
@@ -59,11 +53,15 @@ public class Main {
         // Kullanıcıyı güncelle
 //        KullaniciDAO.updateUser(kullanici);
 //
-//        //foreign key set etme;
+
+//        //Şarkı create etme
 //        TblAlbum album = new TblAlbum();
 //        album.setId(1);
 //        sarki.setAlbum(album);
 //        SarkiDAO.CreateSong(sarki);
+
+
+        //Album create etme
 //        TblAlbum album = new TblAlbum();
 //        AlbumDAO albumdao = new AlbumDAO();
 //        album.setAlbumAd("kaç kadeh kırıldı");
@@ -72,7 +70,7 @@ public class Main {
 //        albumdao.CreateAlbum(album);
 
 
-
+//Sarkı create etme:
 //        TblSarkı sarki= new TblSarkı();
 //        SarkiDAO sarkidao = new SarkiDAO();
 //        sarki.setSarkıAd("Ay");
@@ -83,11 +81,16 @@ public class Main {
 //       album.setId(1);
 //       sarki.setAlbum(album);
 //       sarkidao.CreateSong(sarki);
+
+
+        //Album delete etme:
 //        TblAlbum album = new TblAlbum();
 //        album.setId(6);
 //        AlbumDAO albumDAO = new AlbumDAO();
 //        albumDAO.DeleteAlbum(album);
-        //update -> try : -> succes
+
+
+        //Album update etme:
 //        TblAlbum album = new TblAlbum();
 //        album.setId(5);
 //        album.setTur("Rap");
@@ -95,6 +98,8 @@ public class Main {
 //        album.setTarih(LocalDate.parse("2020-05-05"));
 //        AlbumDAO dao = new AlbumDAO();
 //        dao.UpdateAlbum(album);
+
+        //album Create etme -> iki yolla(boş constructer & elle metotla ) -> boş constructer sıkıntılı veri tabanına düşmüyor kontrol ET!!!
 //        AlbumDAO albumDAO = new AlbumDAO();
 //        TblAlbum album=new TblAlbum(); //boş constructerla model class -> create data ile de oluşturulabilir;
 //        album.setAlbumAd("Romatizmi zirvede yaşa");
@@ -104,6 +109,36 @@ public class Main {
 //        AlbumDAO dao = new AlbumDAO();
 //        ArrayList<TblAlbum> albumList = dao.getSarki();
 //        System.out.println(albumList.size());
+
+
+
+        //Sanatcı silme & create etme -> model classla
+//        TblSanatcı sanatci=new TblSanatcı();
+//        SanatciDAO sanatciDAO=new SanatciDAO();
+//        TblUlke ulke=new TblUlke();
+//        ulke.setId(1);
+//        sanatci.setSanatcıAd("Ajda Pekkan");
+//        sanatci.setUlkeID(ulke);
+//        sanatciDAO.CreateSanatci(sanatci);
+//        TblSanatcı sanatcı =new TblSanatcı();
+//        sanatcı.setId(6);
+//        SanatciDAO sanatciDAO = new SanatciDAO();
+//        sanatciDAO.DeleteSanatci(sanatcı);
+
+        //Sanatcı güncelleme-> model classla
+//        TblSanatcı sanatci=new TblSanatcı();
+//        SanatciDAO dao=new SanatciDAO();
+//        TblUlke ulke=new TblUlke();
+//        ulke.setId(4);
+//        sanatci.setId(8); //id-> 8 olan sanatcıyı güncelle;
+//        sanatci.setSanatcıAd("Hollwieeee");
+//        sanatci.setUlkeID(ulke);
+//        dao.UpdateSanatci(sanatci);
+
+
+
+
+
 
 
 

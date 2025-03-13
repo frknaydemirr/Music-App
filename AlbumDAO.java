@@ -81,7 +81,7 @@ public class AlbumDAO {
     }
 
 
-    //album bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size la kontrol başarılı bir şekilde sağlanıyor;
+    //album bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size(boyut) la kontrol başarılı bir şekilde sağlanıyor;
     public ArrayList<TblAlbum>getSarki(){
         ArrayList<TblAlbum>albumList=new ArrayList<>();
         Connection conn = DataConnection.connect();
