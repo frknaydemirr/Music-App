@@ -12,6 +12,7 @@ import com.example.musicapp.model.TblAlbum;
 import javax.swing.*;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -94,6 +95,24 @@ public class Main {
 //        album.setTarih(LocalDate.parse("2020-05-05"));
 //        AlbumDAO dao = new AlbumDAO();
 //        dao.UpdateAlbum(album);
+//        AlbumDAO albumDAO = new AlbumDAO();
+//        TblAlbum album=new TblAlbum(); //boş constructerla model class -> create data ile de oluşturulabilir;
+//        album.setAlbumAd("Romatizmi zirvede yaşa");
+//        album.setTur("Romatik");
+//        album.setTarih(LocalDate.parse("2018-01-18"));
+//        albumDAO.CreateAlbum(album);
+//        AlbumDAO dao = new AlbumDAO();
+//        ArrayList<TblAlbum> albumList = dao.getSarki();
+//        System.out.println(albumList.size());
+
+
+
+
+
+
+
+
+
 
 
 

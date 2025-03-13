@@ -1,11 +1,8 @@
+import com.example.musicapp.model.TblAlbum;
 import com.example.musicapp.model.TblSarkı;
-import  java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.ResultSet;
-
 
 
 //Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
@@ -106,9 +103,49 @@ public class SarkiDAO {
             e.printStackTrace();
         }
     }
+
+
+    //READ -> hata var;
+    public ArrayList<TblSarkı>getSarki(){
+        ArrayList<TblSarkı>Sarki=new ArrayList<>();
+       Connection conn = DataConnection.connect();
+       if (conn == null) {
+            System.out.println("The Connection connected failed!");
+            return Sarki;
+        }
+        try{
+            Statement stmt = conn.createStatement();
+            String sql="SELECT * FROM TblSarkı";
+            ResultSet rs= stmt.executeQuery(sql);
+            while(rs.next()){
+                Sarki.add(new TblSarkı(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6,new TblAlbum().getId())
+
+
+                );
+
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Error occurred while reading the sarki!");
+        }
+
     }
 
 
+
+
+
+    }
+
+
+    //read kısmını arraylist metotla yap;
 
 
 

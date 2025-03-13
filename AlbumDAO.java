@@ -1,9 +1,7 @@
 import com.example.musicapp.model.TblAlbum;
 import com.example.musicapp.model.TblSarkı;
-import  java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +55,8 @@ public class AlbumDAO {
             }
 
         }
-    //update album with model Class -> NO FOREIGN KEY
 
+    //update album with model Class -> NO FOREIGN KEY
     public static void UpdateAlbum(TblAlbum album){
         java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih());
         //lokal date-> sqldate e dönüştü;
@@ -83,8 +81,32 @@ public class AlbumDAO {
     }
 
 
-    //DELETE Album:
-
+    //album bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size la kontrol başarılı bir şekilde sağlanıyor;
+    public ArrayList<TblAlbum>getSarki(){
+        ArrayList<TblAlbum>albumList=new ArrayList<>();
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("The Connection connected failed!");
+            return albumList;
+        }
+        try{
+            Statement stmt = conn.createStatement();
+            String sql="SELECT * FROM TblAlbum";
+            ResultSet rs= stmt.executeQuery(sql);
+        while (rs.next()){
+            albumList.add(new TblAlbum(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDate(3),
+                    rs.getString(4)
+            ));
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Error occurred while reading the sarki!");
+        }
+return albumList;
+    }
 
     }
 
