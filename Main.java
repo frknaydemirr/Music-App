@@ -137,6 +137,44 @@ public class Main {
 
 
 
+//sarkı ekleme ve calmalistesisarkı tablosuna ekleme aynı anda; -> şarkı üzerinde işlem yapılınca otomataik burada da yapılır;
+
+// TblSarkı nesnesi
+        TblSarkı sarki = new TblSarkı();
+        sarki.setSarkıAd("Yeni Şarkım");
+        sarki.setSure(100);
+        sarki.setDinlenmeSayi(12000);
+        sarki.setTarih(LocalDate.now());
+        TblAlbum album = new TblAlbum();
+        album.setId(5);
+        sarki.setAlbum(album);
+
+
+        TblKullanıcı kullanici = new TblKullanıcı();
+        kullanici.setId(20); //
+        TblCalmaListesi calmaListesi = new TblCalmaListesi();
+        calmaListesi.setKullaniciID(kullanici);
+        calmaListesi.setMuzıkTur("Pop");
+        calmaListesi.setCalmaListesi("Favori şarkılar");
+
+
+        CalmaListesiSarkiDAO dao = new CalmaListesiSarkiDAO();
+        SarkiDAO sarkiDAO = new SarkiDAO();
+        sarkiDAO.CreateSong(sarki, 5);
+        dao.CreateCalmaListesiSarkı(2, 3);
+
+
+//Calma listesine sarkı eklemeyi deneyelim; -> calmalistesine ekleme başarılı:
+//TblCalmaListesi liste=new TblCalmaListesi();
+//TblKullanıcı user=new TblKullanıcı();
+//user.setId(13);
+//liste.setKullaniciID(user);
+//liste.setMuzıkTur("Pop");
+//liste.setCalmaListesi("Her nefeste");
+//CalmaListesiDAO dao=new CalmaListesiDAO();
+//dao.CreateCalmaListesi(liste);
+//
+
 
 
 

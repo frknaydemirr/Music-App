@@ -1,4 +1,5 @@
 import com.example.musicapp.model.TblAlbum;
+import com.example.musicapp.model.TblCalmaListesi;
 import com.example.musicapp.model.TblSarkı;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class SarkiDAO {
 
 
     //CREATE
-    public static void CreateSong(TblSarkı sarkı) {
+    public static void CreateSong(TblSarkı sarkı, int CalmaListesiID) {
         java.sql.Date sqlDate = java.sql.Date.valueOf(sarkı.getTarih());
         //lokal date-> sqldate e dönüştü;
 
@@ -26,7 +27,7 @@ public class SarkiDAO {
         }
         String sql = "INSERT INTO TblSarkı (SarkıAd,Tarih,Sure,DinlenmeSayi,AlbumID) VALUES (?,?,?,?,?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sarkı.getSarkıAd());
             ps.setDate(2, sqlDate);
             ps.setInt(3, sarkı.getSure());
@@ -34,6 +35,15 @@ public class SarkiDAO {
             ps.setInt(5, sarkı.getAlbum().getId());
             ps.executeUpdate();
             System.out.println("The Song have been created!");
+            ResultSet rs= ps.getGeneratedKeys();//sarkıID -> Çekecez! -> sonra CreateCalmaListesiSarkı() metodunun içinbe set edip çağıracaz!
+            while (rs.next()) {
+                int sarkiID = rs.getInt(1); //primary key ile aldığım id yi çektim;
+                System.out.println("SarkıID: " + sarkiID);
+                CalmaListesiSarkiDAO.CreateCalmaListesiSarkı(sarkiID, CalmaListesiID);
+                //calmaListesiTbl ye eklemeyi ekle ->
+//                CalmaListesiDAO.CreateCalmaListesi(new TblCalmaListesi(),CalmaListesiID);
+                System.out.println("--------------------The Song has been added successfully to TblCalmaListesiSarki & TblSarkı  % TblCalmaListesi   -----------------------");
+            }
         } catch (Exception e) {
             System.out.println("Kullanıcı eklenirken hata oluştu!");
             e.printStackTrace();
@@ -106,37 +116,37 @@ public class SarkiDAO {
 
 
 //    READ -> hata var;
-    public ArrayList<TblSarkı>getSarki(){
-        ArrayList<TblSarkı>Sarki=new ArrayList<>();
-       Connection conn = DataConnection.connect();
-       if (conn == null) {
-            System.out.println("The Connection connected failed!");
-            return Sarki;
-        }
-        try{
-            Statement stmt = conn.createStatement();
-            String sql="SELECT * FROM TblSarkı";
-            ResultSet rs= stmt.executeQuery(sql);
-            while(rs.next()){
-                Sarki.add(new TblSarkı(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getDate(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6,new TblAlbum().getId())
-
-
-                );
-
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            System.out.println("Error occurred while reading the sarki!");
-        }
-
-    }
+//    public ArrayList<TblSarkı>getSarki(){
+//        ArrayList<TblSarkı>Sarki=new ArrayList<>();
+//       Connection conn = DataConnection.connect();
+//       if (conn == null) {
+//            System.out.println("The Connection connected failed!");
+//            return Sarki;
+//        }
+//        try{
+//            Statement stmt = conn.createStatement();
+//            String sql="SELECT * FROM TblSarkı";
+//            ResultSet rs= stmt.executeQuery(sql);
+//            while(rs.next()){
+//                Sarki.add(new TblSarkı(
+//                        rs.getInt(1),
+//                        rs.getString(2),
+//                        rs.getDate(3),
+//                        rs.getInt(4),
+//                        rs.getInt(5),
+//                        rs.getInt(6,new TblAlbum().getId())
+//
+//
+//                );
+//
+//            }
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            System.out.println("Error occurred while reading the sarki!");
+//        }
+//
+//    }
 
     //ŞARKI :
     //Şarkı eklenince -> TblÇalmaListesine (many-to-many )   de SarkıID ile eklenmeli, silinince TblÇalmaListesi nden de silinmeli

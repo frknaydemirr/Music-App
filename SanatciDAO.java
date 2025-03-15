@@ -84,34 +84,34 @@ public class SanatciDAO {
 
     //READ-> arraylistte sanatçıları tutup okuma işlemi; -> bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size(boyut) la kontrol başarılı bir şekilde sağlanıyor;
 //    READ -> hata var;
-    public ArrayList<TblSanatcı> getSanatcilar() {
-        ArrayList<TblSanatcı>sanatcilar=new ArrayList<>();
-        Connection conn = DataConnection.connect();
-        if (conn == null) {
-            System.out.println("The Connection connected failed ! ");
-            return sanatcilar;
-        }
-        String sql="SELECT * FROM TblSanatcı";
-        try{
-            PreparedStatement ps=conn.prepareStatement(sql);
-            TblUlke ulke=new TblUlke();
-            Statement st= conn.createStatement();
-            ResultSet rs=st.executeQuery(sql);
-            while (rs.next()){
-                sanatcilar.add(new TblSanatcı(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getInt(3,new TblUlke().getId()); //foreign key okuma işlemi sıkıntı!!!
-
-                ));
-
-
-            }
-        }catch (Exception e) {
-            System.out.println("While reading the error have been created!");
-            e.printStackTrace();
-        }
-return sanatcilar;
-
-    }
+//    public ArrayList<TblSanatcı> getSanatcilar() {
+//        ArrayList<TblSanatcı>sanatcilar=new ArrayList<>();
+//        Connection conn = DataConnection.connect();
+//        if (conn == null) {
+//            System.out.println("The Connection connected failed ! ");
+//            return sanatcilar;
+//        }
+//        String sql="SELECT * FROM TblSanatcı";
+//        try{
+//            PreparedStatement ps=conn.prepareStatement(sql);
+//            TblUlke ulke=new TblUlke();
+//            Statement st= conn.createStatement();
+//            ResultSet rs=st.executeQuery(sql);
+//            while (rs.next()){
+//                sanatcilar.add(new TblSanatcı(
+//                        rs.getInt(1),
+//                        rs.getString(2),
+//                        rs.getInt(3,new TblUlke().getId()); //foreign key okuma işlemi sıkıntı!!!
+//
+//                ));
+//
+//
+//            }
+//        }catch (Exception e) {
+//            System.out.println("While reading the error have been created!");
+//            e.printStackTrace();
+//        }
+//return sanatcilar;
+//
+//    }
 }
