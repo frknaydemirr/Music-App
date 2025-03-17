@@ -14,6 +14,10 @@ public class TblCalmaListesiSarkı {
     @Column(name = "sarkıId", nullable = false)
     private Integer sarkıId;
 
+    private  Integer oldsarkiId;
+
+    private  Integer oldcalmaListesiId;
+
     // Boş Constructor (Hibernate için gerekli)
     public TblCalmaListesiSarkı() {}
 
@@ -38,6 +42,29 @@ public class TblCalmaListesiSarkı {
 
     public void setSarkıId(Integer sarkıId) {
         this.sarkıId = sarkıId;
+    }
+
+    public void setoldSarkıId(Integer sarkıId) {
+        this.oldsarkiId = sarkıId;
+    }
+
+    public Integer getoldSarkıId() {
+        return oldsarkiId;
+    }
+
+    public Integer getoldcalmaListesiId() {
+        return oldcalmaListesiId;
+    }
+
+    public void setOldcalmaListesiId(Integer oldcalmaListesiId) {
+        this.oldcalmaListesiId = oldcalmaListesiId;
+    }
+
+    public TblCalmaListesiSarkı(int calmaListesiId , int sarkıId, int oldcalmaListesiId, int oldsarkiId) {
+        this.çalmaListesiId = çalmaListesiId;
+        this.sarkıId = sarkıId;
+        this.oldcalmaListesiId=oldcalmaListesiId;
+        this.oldsarkiId=oldsarkiId;
     }
 
     @Override

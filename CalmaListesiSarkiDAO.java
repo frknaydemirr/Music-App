@@ -4,13 +4,14 @@
 import com.example.musicapp.model.TblCalmaListesiSarkı;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.example.musicapp.model.TblCalmaListesi; //buradan foreign key olan CalmaListesi -> id yi alır!
 
 
 //CREATE METODU: -> ÇalmaListesine şarkı eklenince TblSarkıya da şarkılar eklenecek; -> TblSarkıda create metodunun içinde çağıracağız metodu!
 public class CalmaListesiSarkiDAO {
-
+private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class.getName());
 
     //CREATE WITH MODEL CLASS
     public static void CreateCalmaListesiSarkı(int sarkiID , int CalmaListesiID){
@@ -65,7 +66,8 @@ public class CalmaListesiSarkiDAO {
 
 
 
-    //update with modal class -> Primary key yok dikkat!
+    //update with modal class -> Primary key yok dikkat! -> başarılı bi şekilde update sağladm!
+    //eklenmesi gereken bu tablo -> çalmalistesiyle ilişkilki olduğpu için onu da etkiler değişimleri!!!
     public static void UpdateCalmaListesiSarki(TblCalmaListesiSarkı calmaListesiSark){
         Connection conn = DataConnection.connect();
         if(conn==null){
@@ -73,16 +75,19 @@ public class CalmaListesiSarkiDAO {
             return;
         }
         String sql="UPDATE TblCalmaListesiSarkı SET CalmaListesiID= ? , SarkıID = ? WHERE CalmaListesiID = ? AND  SarkıID = ?";
-
+        if(calmaListesiSark.getoldcalmaListesiId()==null || calmaListesiSark.getSarkıId()==null){
+            LOGGER.warning("The old CalmaListesiID or SarkıID şs null!");
+            return;
+        }
+        LOGGER.info("Çalma listesi kontrolü başarılı.");
         try{
-            int CalmaListOldID= calmaListesiSark.getÇalmaListesiId();
-            int SarkiOldID=calmaListesiSark.getSarkıId();
             PreparedStatement ps=conn.prepareStatement(sql);
             ps.setInt(1,calmaListesiSark.getSarkıId());
             ps.setInt(2,calmaListesiSark.getÇalmaListesiId());
-            ps.setInt(3,CalmaListOldID);
-            ps.setInt(4,SarkiOldID);
+            ps.setInt(3,calmaListesiSark.getoldcalmaListesiId());
+            ps.setInt(4,calmaListesiSark.getoldSarkıId());
             ps.executeUpdate();
+            System.out.println("The Playlist Song has been updated!");
 
 
         } catch (SQLException e) {

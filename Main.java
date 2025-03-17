@@ -203,22 +203,23 @@ public class Main {
 //            System.out.println(liste);
 //});
 
+//constructer a eklemeler yaparak başarılı bi -> şekilde güncelleme aldık!
+//TblCalmaListesiSarkı list=new TblCalmaListesiSarkı();
+//CalmaListesiSarkiDAO dao=new CalmaListesiSarkiDAO();
+//list.setOldcalmaListesiId(5);
+//list.setoldSarkıId(27);
+//list.setSarkıId(9);
+//list.setÇalmaListesiId(9);
+//dao.UpdateCalmaListesiSarki(list);
+//
 
-TblCalmaListesiSarkı list=new TblCalmaListesiSarkı();
-CalmaListesiSarkiDAO dao=new CalmaListesiSarkiDAO();
-int CalmaListOldID= list.getÇalmaListesiId();
-int SarkiOldID=list.getSarkıId();
-list.setSarkıId(1);
-list.setÇalmaListesiId(10);
-dao.UpdateCalmaListesiSarki(list);
-
-
-
-
-
-
-
-
-
-    }
+//sanatçılar -> constructer ve ToString() metodu -> ile başarıulıu bi şekilde okunup yazdıırlıyor artık!
+//SanatciDAO dao = new SanatciDAO();
+//TblSanatcı sanatcı=new TblSanatcı();
+//ArrayList<TblSanatcı> sanatcilar=dao.getSanatcilar();
+//sanatcilar.forEach(sanatcı1 ->
+//        System.out.println(sanatcı1));
+//
+//
+   }
 }

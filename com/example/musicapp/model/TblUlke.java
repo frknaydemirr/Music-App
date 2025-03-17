@@ -28,4 +28,10 @@ public class TblUlke {
         this.ulkeAd = ulkeAd;
     }
 
+    public String toString(){
+        return "ÜlkeID: " +id +"\n"
+                +"ÜlkeAd: " +ulkeAd ;
+
+    }
+
 }

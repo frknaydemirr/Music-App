@@ -77,17 +77,14 @@ public class SarkiDAO {
         }
     }
 
-
     //    READ -> başarılı bir şekilde  constructer ve ToString() metoduyla şarkılar ekrana yazdırılıyor;; -> tabloya UI a dökeceğiz bunu!
     public ArrayList<TblSarkı> getSarki() {
         ArrayList<TblSarkı> Sarki = new ArrayList<>();
         Connection conn = DataConnection.connect();
-
         if (conn == null) {
             System.out.println("The Connection connected failed!");
             return Sarki;
         }
-
         try {
             Statement stmt = conn.createStatement();
             String sql = "SELECT * FROM TblSarkı";
@@ -108,12 +105,10 @@ public class SarkiDAO {
                         album
                 ));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error occurred while reading the sarki!");
         }
-
         return Sarki;
     }
 

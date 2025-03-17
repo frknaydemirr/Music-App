@@ -17,8 +17,12 @@ public class TblSanatcı {
     @JoinColumn(name = "UlkeID")
     private com.example.musicapp.model.TblUlke ulkeID;
 
-
-
+    public TblSanatcı(int id, String sanatcıAd, TblUlke ulke) {
+        this.id = id;
+        this.sanatcıAd=sanatcıAd;
+        this.ulkeID=ulke;
+    }
+    public TblSanatcı(){}
 
     public Integer getId() {
         return id;
@@ -42,6 +46,13 @@ public class TblSanatcı {
 
     public void setUlkeID(com.example.musicapp.model.TblUlke ulkeID) {
         this.ulkeID = ulkeID;
+    }
+
+    public String toString() {
+        return "SanatçıID: " +id +"\n"
+                +"SanatçıAd : " +sanatcıAd+"\n"
+                +"UlkeID : " +ulkeID.getId()+"\n"
+        +"-------------------------------------------";
     }
 
 }

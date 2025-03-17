@@ -4,6 +4,9 @@ import com.example.musicapp.model.TblCalmaListesiSarkı;
 import java.sql.*;
 
 
+
+//ÇALMA LİSTESİ -> CRUD İŞLEMLERİ -> DİREKT TBLÇALMALİSTESİŞARKI TABLOSUNU ETKİLER!
+//eksik!
 public class CalmaListesiDAO {
 
 public static void CreateCalmaListesi(TblCalmaListesi CalmaListesi ) {
