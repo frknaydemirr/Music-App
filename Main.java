@@ -140,28 +140,28 @@ public class Main {
 //sarkı ekleme ve calmalistesisarkı tablosuna ekleme aynı anda; -> şarkı üzerinde işlem yapılınca otomataik burada da yapılır;
 
 // TblSarkı nesnesi
-        TblSarkı sarki = new TblSarkı();
-        sarki.setSarkıAd("Yeni Şarkım");
-        sarki.setSure(100);
-        sarki.setDinlenmeSayi(12000);
-        sarki.setTarih(LocalDate.now());
-        TblAlbum album = new TblAlbum();
-        album.setId(5);
-        sarki.setAlbum(album);
-
-
-        TblKullanıcı kullanici = new TblKullanıcı();
-        kullanici.setId(20); //
-        TblCalmaListesi calmaListesi = new TblCalmaListesi();
-        calmaListesi.setKullaniciID(kullanici);
-        calmaListesi.setMuzıkTur("Pop");
-        calmaListesi.setCalmaListesi("Favori şarkılar");
-
-
-        CalmaListesiSarkiDAO dao = new CalmaListesiSarkiDAO();
-        SarkiDAO sarkiDAO = new SarkiDAO();
-        sarkiDAO.CreateSong(sarki, 5);
-        dao.CreateCalmaListesiSarkı(2, 3);
+//        TblSarkı sarki = new TblSarkı();
+//        sarki.setSarkıAd("Yeni Şarkım");
+//        sarki.setSure(100);
+//        sarki.setDinlenmeSayi(12000);
+//        sarki.setTarih(LocalDate.now());
+//        TblAlbum album = new TblAlbum();
+//        album.setId(5);
+//        sarki.setAlbum(album);
+//
+//
+//        TblKullanıcı kullanici = new TblKullanıcı();
+//        kullanici.setId(20); //
+//        TblCalmaListesi calmaListesi = new TblCalmaListesi();
+//        calmaListesi.setKullaniciID(kullanici);
+//        calmaListesi.setMuzıkTur("Pop");
+//        calmaListesi.setCalmaListesi("Favori şarkılar");
+//
+//
+//        CalmaListesiSarkiDAO dao = new CalmaListesiSarkiDAO();
+//        SarkiDAO sarkiDAO = new SarkiDAO();
+//        sarkiDAO.CreateSong(sarki, 5);
+//        dao.CreateCalmaListesiSarkı(2, 3);
 
 
 //Calma listesine sarkı eklemeyi deneyelim; -> calmalistesine ekleme başarılı:
@@ -175,16 +175,42 @@ public class Main {
 //dao.CreateCalmaListesi(liste);
 //
 
+//Constructerla başarılı bir şekilde şarkılar okunuyor;;
+//        SarkiDAO dao = new SarkiDAO();
+//       ArrayList<TblSarkı> sarkilistesi=dao.getSarki();
+//        sarkilistesi.forEach(sarki -> {
+//            System.out.println(sarki.toString());
+//        });
 
 
 
+//TblAlbum da constructer -> başarılı bir şlekilde verileri okuduk!
+//TblAlbum album = new TblAlbum();
+//AlbumDAO dao = new AlbumDAO();
+//ArrayList<TblAlbum>albums=dao.getSarki();
+//        System.out.println(albums.size());
+//        albums.forEach(album1 ->{
+//            System.out.println(album1);
+//        });
 
 
 
+//TblCalmaListesiSarkı da constructer -> başarılı bir şlekilde verileri okuduk!
+//TblCalmaListesiSarkı calmaListesiSarkı=new TblCalmaListesiSarkı();
+//CalmaListesiSarkiDAO dao=new CalmaListesiSarkiDAO();
+//ArrayList<TblCalmaListesiSarkı>calmaListesiSarki=dao.getCalmaListesiSarki();
+//        calmaListesiSarki.forEach(liste->{
+//            System.out.println(liste);
+//});
 
 
-
-
+TblCalmaListesiSarkı list=new TblCalmaListesiSarkı();
+CalmaListesiSarkiDAO dao=new CalmaListesiSarkiDAO();
+int CalmaListOldID= list.getÇalmaListesiId();
+int SarkiOldID=list.getSarkıId();
+list.setSarkıId(1);
+list.setÇalmaListesiId(10);
+dao.UpdateCalmaListesiSarki(list);
 
 
 

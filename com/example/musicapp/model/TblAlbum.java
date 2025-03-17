@@ -66,9 +66,15 @@ public  class TblAlbum {
                 +"Tur:"+getTur()+"\n";
     }
 
-    //metot olan dataokuma yı sağlayan constructer
-    public TblAlbum(int anInt, String string, Date date, String string1) {
+
+    //read data successfully;
+    public TblAlbum(Integer id, String albumAd, LocalDate tarih, String tur) {
+        this.id = id;
+        this.albumAd = albumAd;
+        this.tarih = tarih;
+        this.tur = tur;
     }
+
 
     //model class yapısını kullanrak class yapısıyla kolayca album  oluşturur
     public TblAlbum(String albumAd, LocalDate tarih, String tur) {
@@ -81,5 +87,6 @@ public  class TblAlbum {
                 "\nTür: " +tur);
         //TblAlbum album = new TblAlbum("Reaksion",LocalDate.parse("2018-01-18"),"Aksiyon"); -> Id eksik -> album eklemiyor bu yüzden;
     }
+
 }
 

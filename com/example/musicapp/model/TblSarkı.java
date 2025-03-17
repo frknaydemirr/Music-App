@@ -27,6 +27,20 @@ public class TblSarkı {
     @JoinColumn(name = "AlbumId")
     private TblAlbum album;
 
+
+    //read -> için kullandığım const
+    public TblSarkı(int id, String sarkıAd, LocalDate tarih, int sure, int dinlenmeSayi, TblAlbum album) {
+        this.id = id;
+        this.sarkıAd=sarkıAd;
+        this.tarih=tarih;
+        this.sure=sure;
+        this.dinlenmeSayi=dinlenmeSayi;
+        this.album=album;
+    }
+
+    //diğer işlem için kullanığım const
+public TblSarkı(){}
+
     public Integer getId() {
         return id;
     }
@@ -74,5 +88,15 @@ public class TblSarkı {
     public void setAlbum(TblAlbum album) {
         this.album = album;
     }
+
+    public String toString() {
+        return "Şarkı ID: " + id + "\n" +
+                "Şarkı Adı: " + sarkıAd + "\n" +
+                "Tarih: " + tarih + "\n" +
+                "Süre: " + sure + " dakika\n" +
+                "Dinlenme Sayısı: " + dinlenmeSayi + "\n" +
+                "Albüm: " + (album != null ? album.getId() : "Bilinmiyor") + "\n";
+    }
+
 
 }

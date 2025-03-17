@@ -2,6 +2,7 @@ import com.example.musicapp.model.TblAlbum;
 import com.example.musicapp.model.TblSarkı;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,10 +95,11 @@ public class AlbumDAO {
             String sql="SELECT * FROM TblAlbum";
             ResultSet rs= stmt.executeQuery(sql);
         while (rs.next()){
+            LocalDate tarih = (rs.getDate(3) != null) ? rs.getDate(3).toLocalDate() : null;
             albumList.add(new TblAlbum(
                     rs.getInt(1),
                     rs.getString(2),
-                    rs.getDate(3),
+                    tarih,
                     rs.getString(4)
             ));
         }

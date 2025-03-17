@@ -51,4 +51,5 @@ public class TblCalmaListesi {
         this.calmaListesi = calmaListesi;
     }
 
+
 }
