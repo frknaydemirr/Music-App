@@ -48,6 +48,28 @@ public class SarkiSantaciDAO {
         }
     }
 
+    public static void UpdateSarkiSanatci(int eskiSarkiID, int yeniSarkiID){
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("The Connection connected failed ! ");
+            return;
+        }
+        String sql="UPDATE TblSarkıSanatcı SET SarkiID = ? WHERE SarkiID = ?";
+        try {
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ps.setInt(1,yeniSarkiID);
+            ps.setInt(2,eskiSarkiID);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Hata");
+            e.printStackTrace();
+        }
+
+    }
+
+
+
     }
 
 

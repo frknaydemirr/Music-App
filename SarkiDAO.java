@@ -5,15 +5,16 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 //Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
 //yapabilecektir
 
 
-//sarkının olayı->şarkı ekleyebilir; silebilir ve güncelleyebilir!
+
 public class SarkiDAO {
-    //model class->TblSarkı;
+    private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class.getName());
 
 
     //CREATE -->        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor (1 şarkının 1 den fazla sanatçıcı olacak şekilde arraylistle)!
@@ -55,30 +56,38 @@ public class SarkiDAO {
 
 
 
-    public static void UpdateSarkı(TblSarkı sarki){
-        java.sql.Date sqlDate = java.sql.Date.valueOf(sarki.getTarih());
+    //EKSİK -> DÖN!
+    public static void UpdateSarki(TblSarkı eskiSarki, TblSarkı yeniSarki){
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed ! ");
             return;
         }
-        String sql="UPDATE TblSarkı SET SarkıAd = ? Tarih  = ? sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
+        String sql="UPDATE TblSarkı SET SarkıAd = ? , Tarih  = ? , sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
         try {
-            //primary key -> de güncellemeye dahil!
+            if(eskiSarki.getId()!=yeniSarki.getId()){
+                SarkiSantaciDAO.UpdateSarkiSanatci(eskiSarki.getId(),yeniSarki.getId());
+                CalmaListesiSarkiDAO.UpdateCalmaListesiSarki(eskiSarki.getId(),yeniSarki.getId());
+                LOGGER.info("All Data Updated successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
+            }
             PreparedStatement ps= conn.prepareStatement(sql);
-            ps.setString(1,sarki.getSarkıAd());
-            ps.setDate(2,sqlDate);
-            ps.setInt(3,sarki.getSure());
-            ps.setInt(4,sarki.getDinlenmeSayi());
-            ps.setInt(5,sarki.getAlbum().getId()); //albumID -> foreign key -> Tblalbum den album alıyor-> getAlbum();  -> albumId mevcut;!
-            ps.setInt(6,sarki.getId());
+            ps.setString(1,yeniSarki.getSarkıAd());
+            ps.setDate(2,java.sql.Date.valueOf(yeniSarki.getTarih()));
+            ps.setInt(3,yeniSarki.getSure());
+            ps.setInt(4,yeniSarki.getDinlenmeSayi());
+            ps.setInt(5,yeniSarki.getAlbum().getId());
+            ps.setInt(6,eskiSarki.getId());
             ps.executeUpdate();
+            LOGGER.info("The song has been updated successfully! ");
+
+
 
         } catch (Exception e) {
             System.out.println("Hata");
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -132,7 +141,7 @@ public static void DeleteSong(TblSarkı sarki){
             return;
         }
     if (sarki == null || sarki.getId() == null) {
-        System.out.println("Error: The song object or its ID is null!");
+        LOGGER.warning("Error: The song object or its ID is null!");
         return;
     }
     int ID = sarki.getId(); // -> id başta aldımm ki diğer tablolarla ilişkiyi silerken kolay olsun
@@ -143,7 +152,7 @@ public static void DeleteSong(TblSarkı sarki){
         PreparedStatement ps=conn.prepareStatement(sql);
         ps.setInt(1,ID);
         ps.executeUpdate();
-        System.out.println("The Song have been deleted!");
+        LOGGER.info("All Data Deleted successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
 
 
     }
@@ -175,11 +184,6 @@ public static void DeleteSong(TblSarkı sarki){
 
 
 
-//ŞARKI :
-//Şarkı eklenince -> TblÇalmaListesine (many-to-many )   de SarkıID ile eklenmeli, silinince TblÇalmaListesi nden de silinmeli
-//güncelleme durumunda da aynı şekilde işlemler yapılmalıdır!
-//Şarkı eklenip,silinip,güncellenince de TblSarkıSanatçı(many-to-many ) ilişkisi olan tabloda da aynı işlemler gerçekleşmeli!
-//TblAlbum de de ilişki var o da etkilenecek;
 
 
 

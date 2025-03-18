@@ -78,7 +78,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         }
         String sql="UPDATE TblCalmaListesiSarkı SET CalmaListesiID= ? , SarkıID = ? WHERE CalmaListesiID = ? AND  SarkıID = ?";
         if(calmaListesiSark.getoldcalmaListesiId()==null || calmaListesiSark.getSarkıId()==null){
-            LOGGER.warning("The old CalmaListesiID or SarkıID şs null!");
+            LOGGER.warning("The old CalmaListesiID or SarkıID is null!");
             return;
         }
         LOGGER.info("Çalma listesi kontrolü başarılı.");
@@ -97,6 +97,32 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
             System.out.println("Error while updating!");
         }
     }
+
+    //ilişkili durum için update etme (tblsarkı da sarkıId değişti çalmaListesiSarkı tablosyunda da değişen ıd ye göre update yapma)
+
+    public static void UpdateCalmaListesiSarki(int eskiSarkiID, int yeniSarkiID){
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("The Connection connected failed ! ");
+            return;
+        }
+        String sql="UPDATE TblCalmaListesiSarkı SET SarkiID = ? WHERE SarkiID = ?";
+        try {
+
+            PreparedStatement ps= conn.prepareStatement(sql);
+            ps.setInt(1,yeniSarkiID);
+            ps.setInt(2,eskiSarkiID);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Hata");
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 
 

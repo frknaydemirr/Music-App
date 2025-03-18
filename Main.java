@@ -266,5 +266,13 @@ public class Main {
 //        sarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciIDList);
 
 
+
+
+//veri tabanından şarkı bilgielrini okuyalım: -> ona göre update işlemi yapalım:
+
+
+
+
+
    }
 }

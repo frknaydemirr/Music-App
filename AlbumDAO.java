@@ -10,6 +10,10 @@ import java.util.List;
 //Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
 //yapabilecektir
 
+//Albumde olacak olan şey sadece Şarkı tblSarkı tablosuyla ilişkili ->
+//Bir albumde birden fazla Şarkı olacak -> ancak 1 Şarkı sadece  1 ALBUMDE OLACAK [MANY-TO-ONE] İLİŞKİSİ
+
+
 public class AlbumDAO {
 
 
