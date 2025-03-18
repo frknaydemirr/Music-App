@@ -242,6 +242,18 @@ public class Main {
 //        DAO.DeleteSong(sarki);
 
 
+        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor!
+//        TblSarkı yeniSarki = new TblSarkı();
+//        yeniSarki.setSarkıAd("Yeni Şarkı");
+//        yeniSarki.setTarih(LocalDate.of(2024, 3, 18));
+//        yeniSarki.setSure(210);
+//        yeniSarki.setDinlenmeSayi(5000);
+//        TblAlbum album = new TblAlbum();
+//        album.setId(2);
+//        yeniSarki.setAlbum(album);
+//        int calmaListesiID = 1;
+//        int sanatciID = 3;
+//        SarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciID);
 
 
    }

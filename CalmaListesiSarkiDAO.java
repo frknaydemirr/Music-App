@@ -35,6 +35,8 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         }
     }
 
+
+
     //const oluşlturuldu -> READ WITH MODAL CLASS
     public ArrayList<TblCalmaListesiSarkı>getCalmaListesiSarki(){
         ArrayList<TblCalmaListesiSarkı>calmaListesiSarkı=new ArrayList<>();
@@ -95,6 +97,9 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
             System.out.println("Error while updating!");
         }
     }
+
+
+
 
     public static void DeleteCalmaListesiSarki(int sarkiID){
         Connection conn = DataConnection.connect();
