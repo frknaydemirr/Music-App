@@ -1,5 +1,7 @@
 import com.example.musicapp.model.*;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //tbl kullanıcı model sınıfını içeri aktardık!!!
 
@@ -242,18 +244,26 @@ public class Main {
 //        DAO.DeleteSong(sarki);
 
 
-        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor!
+
+
+
+        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor -> bu yapıyla beraber arraylistimize hangi sanatçıları eklersek ister 1 adet ister 3-5 adet
+        // 1 şarkının 1 ve 1 den fazla sanatçısı olma yapısını sağlıyor...
 //        TblSarkı yeniSarki = new TblSarkı();
-//        yeniSarki.setSarkıAd("Yeni Şarkı");
-//        yeniSarki.setTarih(LocalDate.of(2024, 3, 18));
-//        yeniSarki.setSure(210);
-//        yeniSarki.setDinlenmeSayi(5000);
+//        SarkiDAO sarkiDAO = new SarkiDAO();
+//        yeniSarki.setSarkıAd("Ceza Şarkı");
+//        yeniSarki.setTarih(LocalDate.of(2025, 3, 18)); // Tarih ekleyelim
+//        yeniSarki.setSure(210); // Şarkının süresi (saniye cinsinden)
+//        yeniSarki.setDinlenmeSayi(0); // Yeni şarkı olduğu için dinlenme sayısı 0
 //        TblAlbum album = new TblAlbum();
-//        album.setId(2);
+//        album.setId(2); // Örneğin, 2 numaralı albüme ekleyelim
 //        yeniSarki.setAlbum(album);
-//        int calmaListesiID = 1;
-//        int sanatciID = 3;
-//        SarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciID);
+//        int calmaListesiID = 5;
+//        List<Integer> sanatciIDList = new ArrayList<>();
+//        sanatciIDList.add(3); // 3 numaralı sanatçı
+////        sanatciIDList.add(7); // 7 numaralı sanatçı
+////        sanatciIDList.add(5);
+//        sarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciIDList);
 
 
    }

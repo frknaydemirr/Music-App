@@ -16,11 +16,11 @@ public class SarkiDAO {
     //model class->TblSarkı;
 
 
-    //CREATE -->        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor!
-    public static void CreateSong(TblSarkı sarkı, int CalmaListesiID,int SanatciID) {
+    //CREATE -->        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor (1 şarkının 1 den fazla sanatçıcı olacak şekilde arraylistle)!
+    //bir şarkının -> BİRDEN FAZLA SANATCISI OLABİLİR O YÜZDEN SANATCID ALDIK!
+    public static void CreateSong(TblSarkı sarkı, int CalmaListesiID,List<Integer> sanatciIDList) {
         java.sql.Date sqlDate = java.sql.Date.valueOf(sarkı.getTarih());
         //lokal date-> sqldate e dönüştü;
-
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed ! ");
@@ -41,7 +41,9 @@ public class SarkiDAO {
                 int sarkiID = rs.getInt(1); //primary key ile aldığım id yi çektim;
                 System.out.println("SarkıID: " + sarkiID);
                 CalmaListesiSarkiDAO.CreateCalmaListesiSarkı(sarkiID, CalmaListesiID); //->yeni bir şarkı oluşturulunca bu oluşuturulan şarkı -> tblçalmalistesisarkı da da oluşturulur:
-                SarkiSantaciDAO.CreateSarkiSanatci(SanatciID, sarkiID); // yeni bir şarkı oluşturulunca -> bu oluşturulan şarkı ->
+                sanatciIDList.forEach( sanatciID->{
+                    SarkiSantaciDAO.CreateSarkiSanatci(sanatciID, sarkiID);
+                });
 
             }
         } catch (Exception e) {
@@ -50,8 +52,6 @@ public class SarkiDAO {
 
         }
     }
-    //UPDATE with modal class
-
 
 
 
