@@ -205,13 +205,13 @@ public class Main {
 
 //constructer a eklemeler yaparak başarılı bi -> şekilde güncelleme aldık!
 //TblCalmaListesiSarkı list=new TblCalmaListesiSarkı();
-//CalmaListesiSarkiDAO dao=new CalmaListesiSarkiDAO();
-//list.setOldcalmaListesiId(5);
-//list.setoldSarkıId(27);
+//CalmaListesiSarkiDAO Dao=new CalmaListesiSarkiDAO();
+//list.setOldcalmaListesiId(10);
+//list.setoldSarkıId(1);
 //list.setSarkıId(9);
 //list.setÇalmaListesiId(9);
-//dao.UpdateCalmaListesiSarki(list);
-//
+//        Dao.UpdateCalmaListesiSarki(list);
+
 
 //sanatçılar -> constructer ve ToString() metodu -> ile başarıulıu bi şekilde okunup yazdıırlıyor artık!
 //SanatciDAO dao = new SanatciDAO();
@@ -221,5 +221,28 @@ public class Main {
 //        System.out.println(sanatcı1));
 //
 //
+
+//        TblSarkı sarki=new TblSarkı();
+//        SarkiDAO dao=new SarkiDAO();
+//        sarki.setSarkıAd("aaa");
+//        sarki.setTarih(LocalDate.now());
+//        TblAlbum album=new TblAlbum();
+//        album.setId(4);
+//        sarki.setAlbum(album);
+//        sarki.setDinlenmeSayi(1000);
+//        sarki.setSure(12);
+//        dao.CreateSong(sarki,9);
+//
+
+
+// şarkı ile ilişkili olan tablolarda silme işlemi başarılı ->tblşarkısanatcı ve tblcalmalistesi sarkıdan başarılıu siliniyor!
+//        TblSarkı sarki= new TblSarkı();
+//        sarki.setId(7);
+//        SarkiDAO DAO = new SarkiDAO();
+//        DAO.DeleteSong(sarki);
+
+
+
+
    }
 }

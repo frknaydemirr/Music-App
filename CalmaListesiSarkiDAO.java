@@ -96,5 +96,25 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         }
     }
 
+    public static void DeleteCalmaListesiSarki(int sarkiID){
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("Veritabanı bağlantısı başarısız!");
+            return;
+        }
+        String sql= "DELETE FROM TblCalmaListesiSarkı WHERE SarkıID = ?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setInt(1,sarkiID);
+            ps.executeUpdate();
+            System.out.println("The songlist has been deleted!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error while deleting!");
+        }
 
-}
+    }
+        }
+
+
+

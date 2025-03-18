@@ -26,7 +26,7 @@ public class TblSarkı {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AlbumId")
     private TblAlbum album;
-
+    //if(tblsarkı.album.sarkiId == SARKItablosu.sarkıid){ sil album ve şarkıları}
 
     //read -> için kullandığım const
     public TblSarkı(int id, String sarkıAd, LocalDate tarih, int sure, int dinlenmeSayi, TblAlbum album) {

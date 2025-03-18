@@ -40,10 +40,8 @@ public class SarkiDAO {
             while (rs.next()) {
                 int sarkiID = rs.getInt(1); //primary key ile aldığım id yi çektim;
                 System.out.println("SarkıID: " + sarkiID);
-                CalmaListesiSarkiDAO.CreateCalmaListesiSarkı(sarkiID, CalmaListesiID);
-                //calmaListesiTbl ye eklemeyi ekle ->
-//                CalmaListesiDAO.CreateCalmaListesi(new TblCalmaListesi(),CalmaListesiID);
-                System.out.println("--------------------The Song has been added successfully to TblCalmaListesiSarki & TblSarkı  % TblCalmaListesi   -----------------------");
+                CalmaListesiSarkiDAO.CreateCalmaListesiSarkı(sarkiID, CalmaListesiID); //->yeni bir şarkı oluşturulunca bu oluşuturulan şarkı -> tblçalmalistesisarkı da da oluşturulur:
+
             }
         } catch (Exception e) {
             System.out.println("Kullanıcı eklenirken hata oluştu!");
@@ -118,45 +116,75 @@ public class SarkiDAO {
 
 //Sarkı-> Album,CalmalistesiSarkı,SarkıSanatçı ya bağlıdır!
     //DELETE -> sarkı da albumün primary key-> foreign key var kontrollü silme !!!
-    public static void DeleteSarkı(TblSarkı sarki) {
+//    public static void DeleteSarkı(TblSarkı sarki) {
+//        Connection conn = DataConnection.connect();
+//        if (conn == null) {
+//            System.out.println("The Connection connected failed!");
+//            return;
+//        }
+//
+//        try {
+//            //  bu şarkıya bağlı albümü
+//            String albumQuery = "SELECT COUNT(*) FROM TblSarkı WHERE AlbumID = ?"; //foreign key olan ıd
+//            PreparedStatement psAlbum = conn.prepareStatement(albumQuery);
+//            psAlbum.setInt(1, sarki.getAlbum().getId());
+//            ResultSet rs = psAlbum.executeQuery();
+//
+//            if (rs.next() && rs.getInt(1) > 1) {
+//                //  aynı albüme ait başka şarkılar varsa
+//                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+//                PreparedStatement psSarki = conn.prepareStatement(sql);
+//                psSarki.setInt(1, sarki.getId());
+//                psSarki.executeUpdate();
+//                System.out.println("Song deleted successfully!");
+//            } else {
+//                // Eğer albüme bağlı başka şarkılar yoksa, albümün de silinmesi .
+//                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+//                PreparedStatement psDeleteSong = conn.prepareStatement(sql);
+//                psDeleteSong.setInt(1, sarki.getId());
+//                psDeleteSong.executeUpdate();
+//
+//                System.out.println("Song   deleted successfully!");
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error occurred while deleting the song!");
+//            e.printStackTrace();
+//        }
+//    }
+
+
+//TblCalmaListesiSarkı tablosundaki ilgili kayıtlar silinmeli. -> TblSarkıSanatcı tablosundaki ilgili kayıtlar silinmeli. ->TblSarkı tablosundan şarkı silinmeli.
+public static void DeleteSong(TblSarkı sarki){
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed!");
             return;
         }
+    if (sarki == null || sarki.getId() == null) {
+        System.out.println("Error: The song object or its ID is null!");
+        return;
+    }
+    int ID = sarki.getId(); // -> id başta aldımm ki diğer tablolarla ilişkiyi silerken kolay olsun
+    try {
+        CalmaListesiSarkiDAO.DeleteCalmaListesiSarki(ID);
+        SarkiSantaciDAO.DeleteSarkiSanatci(ID);
+        String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+        PreparedStatement ps=conn.prepareStatement(sql);
+        ps.setInt(1,ID);
+        ps.executeUpdate();
+        System.out.println("The Song have been deleted!");
 
-        try {
-            //  bu şarkıya bağlı albümü
-            String albumQuery = "SELECT COUNT(*) FROM TblSarkı WHERE AlbumID = ?"; //foreign key olan ıd
-            PreparedStatement psAlbum = conn.prepareStatement(albumQuery);
-            psAlbum.setInt(1, sarki.getAlbum().getId());
-            ResultSet rs = psAlbum.executeQuery();
 
-            if (rs.next() && rs.getInt(1) > 1) {
-                //  aynı albüme ait başka şarkılar varsa
-                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
-                PreparedStatement psSarki = conn.prepareStatement(sql);
-                psSarki.setInt(1, sarki.getId());
-                psSarki.executeUpdate();
-                System.out.println("Song deleted successfully!");
-            } else {
-                // Eğer albüme bağlı başka şarkılar yoksa, albümün de silinmesi .
-                String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
-                PreparedStatement psDeleteSong = conn.prepareStatement(sql);
-                psDeleteSong.setInt(1, sarki.getId());
-                psDeleteSong.executeUpdate();
-
-                System.out.println("Song   deleted successfully!");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error occurred while deleting the song!");
-            e.printStackTrace();
-        }
+    }
+    catch (SQLException e) {
+        e.printStackTrace();
     }
 
 
 
 
+
+}
 
 
 
