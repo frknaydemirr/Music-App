@@ -267,36 +267,38 @@ public class Main {
 ////        sanatciIDList.add(5);
 //        sarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciIDList);
 //
-        TblSarkı eskiSarki=new TblSarkı();
-        eskiSarki.setSarkıAd("The Starboy");
-        eskiSarki.setSure(4);
-        eskiSarki.setTarih(LocalDate.parse("2022-12-12"));
-        eskiSarki.setId(1);
-        eskiSarki.setDinlenmeSayi(1000);
+//        TblSarkı eskiSarki=new TblSarkı();
+//        eskiSarki.setSarkıAd("The Starboy");
+//        eskiSarki.setSure(4);
+//        eskiSarki.setTarih(LocalDate.parse("2022-12-12"));
+//        eskiSarki.setId(1);
+//        eskiSarki.setDinlenmeSayi(1000);
+//        TblAlbum album = new TblAlbum();
+//        album.setId(4);
+//        eskiSarki.setAlbum(album);
+//
+//
+//
+//
+//        TblSarkı yenisarki=new TblSarkı();
+//        yenisarki.setSarkıAd("furkan ay");
+//        yenisarki.setSure(5);
+//        yenisarki.setTarih(LocalDate.parse("2022-12-12"));
+//        yenisarki.setDinlenmeSayi(12010);
+//        TblAlbum album1 = new TblAlbum();
+//        album1.setId(7);
+//        yenisarki.setAlbum(album1);
+//        SarkiDAO dao=new SarkiDAO();
+//        dao.UpdateSarki(eskiSarki,yenisarki);
+
+
+
+
+
         TblAlbum album = new TblAlbum();
-        album.setId(4);
-        eskiSarki.setAlbum(album);
-
-
-
-
-        TblSarkı yenisarki=new TblSarkı();
-        yenisarki.setSarkıAd("furkan ay");
-        yenisarki.setSure(5);
-        yenisarki.setTarih(LocalDate.parse("2022-12-12"));
-        yenisarki.setDinlenmeSayi(12010);
-        TblAlbum album1 = new TblAlbum();
-        album1.setId(7);
-        yenisarki.setAlbum(album1);
-        SarkiDAO dao=new SarkiDAO();
-        dao.UpdateSarki(eskiSarki,yenisarki);
-
-
-
-
-
-
-
+        AlbumDAO dao = new AlbumDAO();
+        album.setId(3);
+        dao.DeleteAlbum(album);
 
 
 
