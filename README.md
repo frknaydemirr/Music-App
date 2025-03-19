@@ -21,7 +21,8 @@ bütünlüğü korunmuş ve olası hatalara karşı hızlı müdahale imkânı s
 
 ![image](https://github.com/user-attachments/assets/80d6b685-4260-4d15-81e8-1b11ddcbd4dd)
 
-![image](https://github.com/user-attachments/assets/4a69ee81-22a9-4468-b5bd-08af45107760)
+![image](https://github.com/user-attachments/assets/42a8ab95-03b5-4349-9ba0-4b338c6d8f45)
+
 
 ![image](https://github.com/user-attachments/assets/98dc99f9-28cb-4ef9-b648-592ce7cafb8d)
 
