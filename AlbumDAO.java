@@ -1,6 +1,5 @@
 import com.example.musicapp.model.TblAlbum;
 import com.example.musicapp.model.TblSarkı;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,11 +7,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-//Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
-//yapabilecektir
 
-//Albumde olacak olan şey sadece Şarkı tblSarkı tablosuyla ilişkili ->
-//Bir albumde birden fazla Şarkı olacak -> ancak 1 Şarkı sadece  1 ALBUMDE OLACAK [MANY-TO-ONE] İLİŞKİSİ
+
+
 
 
 public class AlbumDAO {
@@ -138,11 +135,11 @@ public class AlbumDAO {
 return albumList;
     }
 
+
+
+
     }
 
-//album silinince,güncellenince,create edilince otomatikman bağlantılı olduğu tablo  -> TblSarkı da da aynı işlemler ytapulır
-//1(albumıd)	Efkarlanma	2020-12-12	Acıklı -> 1 numaralı album kategorisini kaldırınca şarkının ait oldupu albüm gidinec şlarkı da gider!
-//6	Honur me	2012-09-23	10	1	1(albumId)
 
 
 
