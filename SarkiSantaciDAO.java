@@ -1,5 +1,3 @@
-//Şarkı eklenip,silinip,güncellenince de TblSarkıSanatçı(many-to-many ) ilişkisi olan tabloda da aynı işlemler gerçekleşmeli!
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +6,7 @@ import java.sql.SQLException;
 public class SarkiSantaciDAO {
 
 
-    //şarkı silinince şarkı sanatçı başarılı bi şekilde siliniyor!
+
     public static void DeleteSarkiSanatci(int sarkiID) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {

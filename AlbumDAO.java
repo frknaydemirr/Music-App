@@ -15,10 +15,9 @@ import java.util.logging.Logger;
 public class AlbumDAO {
     private static final Logger LOGGER = Logger.getLogger(AlbumDAO.class.getName());
 
-        //CREATE album -> bir albumde 1'den fazla şarkı bulunabilir ancak 1 şarkı yanlızca 1 albumde bulunur!
         public static void CreateAlbum(TblAlbum album){
             Connection conn = DataConnection.connect();
-            java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih()); //localdate türünde olduğu için;
+            java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih());
             if (conn == null) {
                 System.out.println("The Connection connected failed ! ");
                 return;

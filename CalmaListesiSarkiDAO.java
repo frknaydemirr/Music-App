@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 import com.example.musicapp.model.TblCalmaListesi; //buradan foreign key olan CalmaListesi -> id yi alır!
 
 
-//CREATE METODU: -> ÇalmaListesine şarkı eklenince TblSarkıya da şarkılar eklenecek; -> TblSarkıda create metodunun içinde çağıracağız metodu!
+
 public class CalmaListesiSarkiDAO {
 private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class.getName());
 
-    //CREATE WITH MODEL CLASS
+
     public static void CreateCalmaListesiSarkı(int sarkiID , int CalmaListesiID){
         Connection conn = DataConnection.connect();
         if(conn==null){
@@ -37,7 +37,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
 
 
 
-    //const oluşlturuldu -> READ WITH MODAL CLASS
+
     public ArrayList<TblCalmaListesiSarkı>getCalmaListesiSarki(){
         ArrayList<TblCalmaListesiSarkı>calmaListesiSarkı=new ArrayList<>();
         Connection conn = DataConnection.connect();
@@ -68,7 +68,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
 
 
 
-    //update with modal class -> Primary key yok dikkat! -> başarılı bi şekilde update sağladm!
+
     //eklenmesi gereken bu tablo -> çalmalistesiyle ilişkilki olduğpu için onu da etkiler değişimleri!!!
     public static void UpdateCalmaListesiSarki(TblCalmaListesiSarkı calmaListesiSark){
         Connection conn = DataConnection.connect();
@@ -98,7 +98,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         }
     }
 
-    //ilişkili durum için update etme (tblsarkı da sarkıId değişti çalmaListesiSarkı tablosyunda da değişen ıd ye göre update yapma)
+
 
     public static void UpdateCalmaListesiSarki(int eskiSarkiID, int yeniSarkiID){
         Connection conn = DataConnection.connect();

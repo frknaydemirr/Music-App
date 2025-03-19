@@ -254,26 +254,56 @@ public class Main {
 //        TblSarkı yeniSarki = new TblSarkı();
 //        SarkiDAO sarkiDAO = new SarkiDAO();
 //        yeniSarki.setSarkıAd("Ceza Şarkı");
-//        yeniSarki.setTarih(LocalDate.of(2025, 3, 18)); // Tarih ekleyelim
-//        yeniSarki.setSure(210); // Şarkının süresi (saniye cinsinden)
-//        yeniSarki.setDinlenmeSayi(0); // Yeni şarkı olduğu için dinlenme sayısı 0
+//        yeniSarki.setTarih(LocalDate.of(2025, 3, 18));
+//        yeniSarki.setSure(210);
+//        yeniSarki.setDinlenmeSayi(0);
 //        TblAlbum album = new TblAlbum();
-//        album.setId(2); // Örneğin, 2 numaralı albüme ekleyelim
+//        album.setId(2);
 //        yeniSarki.setAlbum(album);
 //        int calmaListesiID = 5;
 //        List<Integer> sanatciIDList = new ArrayList<>();
-//        sanatciIDList.add(3); // 3 numaralı sanatçı
+//        sanatciIDList.add(3);
 ////        sanatciIDList.add(7); // 7 numaralı sanatçı
 ////        sanatciIDList.add(5);
 //        sarkiDAO.CreateSong(yeniSarki, calmaListesiID, sanatciIDList);
+//
+        TblSarkı eskiSarki=new TblSarkı();
+        eskiSarki.setSarkıAd("The Starboy");
+        eskiSarki.setSure(4);
+        eskiSarki.setTarih(LocalDate.parse("2022-12-12"));
+        eskiSarki.setId(1);
+        eskiSarki.setDinlenmeSayi(1000);
+        TblAlbum album = new TblAlbum();
+        album.setId(4);
+        eskiSarki.setAlbum(album);
 
 
 
 
-TblAlbum album = new TblAlbum();
-album.setId(5);
-AlbumDAO dao = new AlbumDAO();
-dao.DeleteAlbum(album);
+        TblSarkı yenisarki=new TblSarkı();
+        yenisarki.setSarkıAd("furkan ay");
+        yenisarki.setSure(5);
+        yenisarki.setTarih(LocalDate.parse("2022-12-12"));
+        yenisarki.setDinlenmeSayi(12010);
+        TblAlbum album1 = new TblAlbum();
+        album1.setId(7);
+        yenisarki.setAlbum(album1);
+        SarkiDAO dao=new SarkiDAO();
+        dao.UpdateSarki(eskiSarki,yenisarki);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

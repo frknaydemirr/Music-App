@@ -26,8 +26,21 @@ public class SarkiDAO {
             System.out.println("The Connection connected failed ! ");
             return;
         }
-        String sql = "INSERT INTO TblSarkı (SarkıAd,Tarih,Sure,DinlenmeSayi,AlbumID) VALUES (?,?,?,?,?)";
+        conn.setAutoCommit(false);
         try {
+            String albumsql = "SELECT AlbumID FROM TblAlbum";
+            PreparedStatement albumps = conn.prepareStatement(albumsql);
+            ResultSet rsalbum = albumps.executeQuery();
+            ArrayList<Integer> AlbumIdList = new ArrayList<Integer>();
+            while (rsalbum.next()) {
+                AlbumIdList.add(rsalbum.getInt("AlbumID"));
+            }
+            if (!AlbumIdList.contains(sarkı.getAlbum().getId())) {
+                LOGGER.warning("Invalid Album ID");
+                conn.rollback();
+                return;
+            }
+            String sql = "INSERT INTO TblSarkı (SarkıAd,Tarih,Sure,DinlenmeSayi,AlbumID) VALUES (?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sarkı.getSarkıAd());
             ps.setDate(2, sqlDate);
@@ -37,7 +50,6 @@ public class SarkiDAO {
             ps.executeUpdate();
             System.out.println("The Song have been created!");
             ResultSet rs= ps.getGeneratedKeys();//sarkıID -> Çekecez! -> sonra CreateCalmaListesiSarkı() metodunun içinbe set edip çağıracaz!
-            conn.setAutoCommit(false);
             while (rs.next()) {
                 int sarkiID = rs.getInt(1); //primary key ile aldığım id yi çektim;
                 System.out.println("SarkıID: " + sarkiID);
@@ -49,46 +61,75 @@ public class SarkiDAO {
             }
             conn.commit();
         } catch (Exception e) {
-            System.out.println("Kullanıcı eklenirken hata oluştu!");
+            System.out.println("An error occured while creating song  !");
             e.printStackTrace();
             conn.rollback();
 
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
         }
     }
 
 
 
-    //EKSİK -> DÖN! -> güncelleme kısmında albumId değişmesi var ona dikkat!
-    public static void UpdateSarki(TblSarkı eskiSarki, TblSarkı yeniSarki){
+//id-> null erroru alıyoruz dön!
+    public static void UpdateSarki(TblSarkı eskiSarki, TblSarkı yeniSarki) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed ! ");
             return;
         }
-        String sql="UPDATE TblSarkı SET SarkıAd = ? , Tarih  = ? , sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
+        conn.setAutoCommit(false);
+        ResultSet rsalbum = null;
+        PreparedStatement albumps = null;
         try {
-            if(eskiSarki.getId()!=yeniSarki.getId()){
-                SarkiSantaciDAO.UpdateSarkiSanatci(eskiSarki.getId(),yeniSarki.getId());
-                CalmaListesiSarkiDAO.UpdateCalmaListesiSarki(eskiSarki.getId(),yeniSarki.getId());
+            String albumsql = "SELECT AlbumID FROM TblAlbum";//olmayan albumu kullanıcı sarkıyı güncelleyeceğinde set etmemeli!
+            albumps = conn.prepareStatement(albumsql);
+            rsalbum = albumps.executeQuery();
+            ArrayList<Integer> AlbumIdList = new ArrayList<Integer>();
+            while (rsalbum.next()) {
+                AlbumIdList.add(rsalbum.getInt("AlbumID"));
+            }
+            if (!AlbumIdList.contains(yeniSarki.getAlbum().getId())) {
+                LOGGER.warning("Invalid Album ID");
+                conn.rollback();
+                return;
+            }
+            if(eskiSarki.getId()==null || yeniSarki.getId()==null){
+                LOGGER.warning("ID is NULL!");
+                return;
+            }
+            if (eskiSarki.getId() != yeniSarki.getId()) {
+                SarkiSantaciDAO.UpdateSarkiSanatci(eskiSarki.getId(), yeniSarki.getId());
+                CalmaListesiSarkiDAO.UpdateCalmaListesiSarki(eskiSarki.getId(), yeniSarki.getId());
                 LOGGER.info("All Data Updated successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
             }
-            PreparedStatement ps= conn.prepareStatement(sql);
-            ps.setString(1,yeniSarki.getSarkıAd());
-            ps.setDate(2,java.sql.Date.valueOf(yeniSarki.getTarih()));
-            ps.setInt(3,yeniSarki.getSure());
-            ps.setInt(4,yeniSarki.getDinlenmeSayi());
-            ps.setInt(5,yeniSarki.getAlbum().getId());
-            ps.setInt(6,eskiSarki.getId());
+            String sql = "UPDATE TblSarkı SET SarkıAd = ? , Tarih  = ? , sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, yeniSarki.getSarkıAd());
+            ps.setDate(2, java.sql.Date.valueOf(yeniSarki.getTarih()));
+            ps.setInt(3, yeniSarki.getSure());
+            ps.setInt(4, yeniSarki.getDinlenmeSayi());
+            ps.setInt(5, yeniSarki.getAlbum().getId());
+            ps.setInt(6, eskiSarki.getId());
             ps.executeUpdate();
             LOGGER.info("The song has been updated successfully! ");
-
-
+            conn.commit();
 
         } catch (Exception e) {
-            System.out.println("Hata");
+            System.out.println("Error occuring while updating TblSarkı ");
             e.printStackTrace();
+            conn.rollback();
+        } finally {
+            if (rsalbum != null) rsalbum.close();
+            if (albumps != null) albumps.close();
+            if (conn != null) conn.close();
         }
     }
+
+
+
 
 
 
@@ -135,9 +176,6 @@ public class SarkiDAO {
 
 
 
-//TblCalmaListesiSarkı tablosundaki ilgili kayıtlar silinmeli. -> TblSarkıSanatcı tablosundaki ilgili kayıtlar silinmeli. ->TblSarkı tablosundan şarkı silinmeli.
-
-//şarkı silmede dikkat edeceğimiz kısım -> şarkının bulunduğu albumde bu şarkıdan başka şarkı var mı -> eğer yoksa albumu de sileceğiz [MANY-TO-ONE ilişkisi]
 
 public static void DeleteSong(TblSarkı sarki) throws SQLException {
         Connection conn = DataConnection.connect();

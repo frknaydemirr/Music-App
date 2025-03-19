@@ -35,11 +35,13 @@ public class TblSarkı {
         this.tarih=tarih;
         this.sure=sure;
         this.dinlenmeSayi=dinlenmeSayi;
-        this.album=album;
+        this.album= album;
     }
 
     //diğer işlem için kullanığım const
 public TblSarkı(){}
+
+
 
     public Integer getId() {
         return id;

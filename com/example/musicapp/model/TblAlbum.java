@@ -27,6 +27,8 @@ public  class TblAlbum {
     }
 
 
+
+
     public Integer getId() {
         return id;
     }
