@@ -134,7 +134,7 @@ public class SarkiDAO {
 
 
 
-    //    READ -> başarılı bir şekilde  constructer ve ToString() metoduyla şarkılar ekrana yazdırılıyor;; -> tabloya UI a dökeceğiz bunu!
+    //  -> tabloya UI a dökeceğiz bunu!
     public ArrayList<TblSarkı> getSarki() {
         ArrayList<TblSarkı> Sarki = new ArrayList<>();
         Connection conn = DataConnection.connect();
@@ -187,19 +187,29 @@ public static void DeleteSong(TblSarkı sarki) throws SQLException {
         LOGGER.warning("Error: The song object or its ID is null!");
         return;
     }
-    conn.setAutoCommit(false); //ilişkide  senkronluğu sağldm
-    int ID = sarki.getId();// -> id başta aldımm ki diğer tablolarla ilişkiyi silerken kolay olsun
+    conn.setAutoCommit(false);
+    int ID = sarki.getId();
     int  albumID=sarki.getAlbum().getId();
 
     try {
         CalmaListesiSarkiDAO.DeleteCalmaListesiSarki(ID);
         SarkiSantaciDAO.DeleteSarkiSanatci(ID);
         String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
-        String albumsql="SELECT COUNT(*) AS ŞarkıSayısı FROM TblSarkı WHERE AlbumID = ?"; //silinecek şarkının bulundupu albumdeki şarkı sayısı =1 ise album de direkt silinir;
         PreparedStatement ps=conn.prepareStatement(sql);
         ps.setInt(1,ID);
         ps.executeUpdate();
         LOGGER.info("All Data Deleted successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
+        String albumReadsql="SELECT COUNT(*) AS ŞarkıSayısı FROM TblSarkı WHERE AlbumID = ?";
+        PreparedStatement albumReadps=conn.prepareStatement(albumReadsql);
+        albumReadps.setInt(1, albumID);
+        ResultSet rs=albumReadps.executeQuery();
+        if(rs.next() && rs.getInt("ŞarkıSayısı")==0){
+            String AlbumDeletesql = "DELETE FROM TblAlbum WHERE AlbumID = ?";
+            PreparedStatement psDeleteAlbum=conn.prepareStatement(AlbumDeletesql);
+            psDeleteAlbum.setInt(1, albumID);
+            psDeleteAlbum.executeUpdate();
+            LOGGER.info("The album was deleted because it was empty!");
+        }
         conn.commit();
     }
     catch (SQLException e) {

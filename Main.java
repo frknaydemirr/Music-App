@@ -286,19 +286,26 @@ public class Main {
 //        yenisarki.setTarih(LocalDate.parse("2022-12-12"));
 //        yenisarki.setDinlenmeSayi(12010);
 //        TblAlbum album1 = new TblAlbum();
-//        album1.setId(7);
+//        album1.setId(50);
 //        yenisarki.setAlbum(album1);
 //        SarkiDAO dao=new SarkiDAO();
 //        dao.UpdateSarki(eskiSarki,yenisarki);
+        TblSarkı sarki=new TblSarkı();
+        SarkiDAO sarkiDAO=new SarkiDAO();
+        sarki.setId(1035);
+        TblAlbum album=new TblAlbum();
+        album.setId(8);
+        sarki.setAlbum(album);
+        sarkiDAO.DeleteSong(sarki);
 
 
 
 
 
-        TblAlbum album = new TblAlbum();
-        AlbumDAO dao = new AlbumDAO();
-        album.setId(3);
-        dao.DeleteAlbum(album);
+//        TblAlbum album = new TblAlbum();
+//        AlbumDAO dao = new AlbumDAO();
+//        album.setId(3);
+//        dao.DeleteAlbum(album);
 
 
 
