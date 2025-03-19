@@ -43,8 +43,8 @@ public class AlbumDAO {
 
 
 
-
-
+//album silinince -> şarkı direkt silinir
+//şarkı silinince bağlı olan -> tblcalmalistesisarkı ve tblsarkısanatcı da silinir!
         public static void DeleteAlbum(TblAlbum album) throws SQLException {
             Connection conn = DataConnection.connect();
             if (conn == null) {
@@ -53,8 +53,18 @@ public class AlbumDAO {
             }
             try {
                 conn.setAutoCommit(false);
-//Ancak şarkılar-> albume bağlı (Çünkü albumde birden fazla şarkı var ancak 1 şarkı sadece 1 albumde oluyor) -> album siliniyorsa şarkıyı da direkt silmeliyiz!
-              //ilişkili veri ->   int AlbumID= album.getId();
+                String sarkiID="SELECT SarkıID from TblSarkı  WHERE AlbumID = ? "; //albumlerin içindeki şarkıların ID sini çektik;
+                PreparedStatement psSarki = conn.prepareStatement(sarkiID);
+                psSarki.setInt(1, album.getId());
+                ResultSet rsSarki = psSarki.executeQuery(); //sarkıID leri depoladık
+                while (rsSarki.next()) {
+                    int Sarki_ID=rsSarki.getInt("SarkıID");
+                    CalmaListesiSarkiDAO calmaListesiSarkiDAO = new CalmaListesiSarkiDAO();
+                    calmaListesiSarkiDAO.DeleteCalmaListesiSarki(Sarki_ID);
+                    SarkiSantaciDAO sarkiSantaciDAO = new SarkiSantaciDAO();
+                    sarkiSantaciDAO.DeleteSarkiSanatci(Sarki_ID);
+                }
+                LOGGER.info("Deleted all data  related to songs (TblSarkı)  !");
                 String songsql= "DELETE FROM TblSarkı WHERE AlbumID = ?";
                 PreparedStatement psSong = conn.prepareStatement(songsql);
                 psSong.setInt(1, album.getId());
@@ -74,9 +84,11 @@ public class AlbumDAO {
         }
 
 
+
+
+
     public static void UpdateAlbum(TblAlbum album){
         java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih());
-        //lokal date-> sqldate e dönüştü;
             Connection conn = DataConnection.connect();
             if (conn == null) {
                 System.out.println("The Connection connected failed ! ");

@@ -58,7 +58,7 @@ public class SarkiDAO {
 
 
 
-    //EKSİK -> DÖN!
+    //EKSİK -> DÖN! -> güncelleme kısmında albumId değişmesi var ona dikkat!
     public static void UpdateSarki(TblSarkı eskiSarki, TblSarkı yeniSarki){
         Connection conn = DataConnection.connect();
         if (conn == null) {
@@ -167,6 +167,7 @@ public static void DeleteSong(TblSarkı sarki) throws SQLException {
     catch (SQLException e) {
         conn.rollback();
         e.printStackTrace();
+        conn.close();
     }
 
 }

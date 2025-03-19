@@ -127,7 +127,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
 
 
 
-    public static void DeleteCalmaListesiSarki(int sarkiID){
+    public static void DeleteCalmaListesiSarki(int sarkiID) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("Veritabanı bağlantısı başarısız!");
@@ -142,6 +142,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error while deleting!");
+            conn.close();
         }
 
     }

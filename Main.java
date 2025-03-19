@@ -1,4 +1,6 @@
 import com.example.musicapp.model.*;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 EntryPage entry = new EntryPage();
@@ -268,7 +270,10 @@ public class Main {
 
 
 
-//veri tabanından şarkı bilgielrini okuyalım: -> ona göre update işlemi yapalım:
+TblAlbum album = new TblAlbum();
+album.setId(5);
+AlbumDAO dao = new AlbumDAO();
+dao.DeleteAlbum(album);
 
 
 
