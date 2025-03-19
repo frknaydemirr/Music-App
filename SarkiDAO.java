@@ -17,11 +17,10 @@ public class SarkiDAO {
     private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class.getName());
 
 
-    //CREATE -->        //şarkı create edilince -> doğrudan çalmalistesiSarkı ve sanatcıSarkı da da başarılı bi şekilde create ediliyor (1 şarkının 1 den fazla sanatçıcı olacak şekilde arraylistle)!
-    //bir şarkının -> BİRDEN FAZLA SANATCISI OLABİLİR O YÜZDEN SANATCID ALDIK!
-    public static void CreateSong(TblSarkı sarkı, int CalmaListesiID,List<Integer> sanatciIDList) {
+
+
+    public static void CreateSong(TblSarkı sarkı, int CalmaListesiID,List<Integer> sanatciIDList) throws SQLException {
         java.sql.Date sqlDate = java.sql.Date.valueOf(sarkı.getTarih());
-        //lokal date-> sqldate e dönüştü;
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed ! ");
@@ -38,6 +37,7 @@ public class SarkiDAO {
             ps.executeUpdate();
             System.out.println("The Song have been created!");
             ResultSet rs= ps.getGeneratedKeys();//sarkıID -> Çekecez! -> sonra CreateCalmaListesiSarkı() metodunun içinbe set edip çağıracaz!
+            conn.setAutoCommit(false);
             while (rs.next()) {
                 int sarkiID = rs.getInt(1); //primary key ile aldığım id yi çektim;
                 System.out.println("SarkıID: " + sarkiID);
@@ -47,9 +47,11 @@ public class SarkiDAO {
                 });
 
             }
+            conn.commit();
         } catch (Exception e) {
             System.out.println("Kullanıcı eklenirken hata oluştu!");
             e.printStackTrace();
+            conn.rollback();
 
         }
     }
@@ -134,7 +136,10 @@ public class SarkiDAO {
 
 
 //TblCalmaListesiSarkı tablosundaki ilgili kayıtlar silinmeli. -> TblSarkıSanatcı tablosundaki ilgili kayıtlar silinmeli. ->TblSarkı tablosundan şarkı silinmeli.
-public static void DeleteSong(TblSarkı sarki){
+
+//şarkı silmede dikkat edeceğimiz kısım -> şarkının bulunduğu albumde bu şarkıdan başka şarkı var mı -> eğer yoksa albumu de sileceğiz [MANY-TO-ONE ilişkisi]
+
+public static void DeleteSong(TblSarkı sarki) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {
             System.out.println("The Connection connected failed!");
@@ -144,25 +149,25 @@ public static void DeleteSong(TblSarkı sarki){
         LOGGER.warning("Error: The song object or its ID is null!");
         return;
     }
-    int ID = sarki.getId(); // -> id başta aldımm ki diğer tablolarla ilişkiyi silerken kolay olsun
+    conn.setAutoCommit(false); //ilişkide  senkronluğu sağldm
+    int ID = sarki.getId();// -> id başta aldımm ki diğer tablolarla ilişkiyi silerken kolay olsun
+    int  albumID=sarki.getAlbum().getId();
+
     try {
         CalmaListesiSarkiDAO.DeleteCalmaListesiSarki(ID);
         SarkiSantaciDAO.DeleteSarkiSanatci(ID);
         String sql = "DELETE FROM TblSarkı WHERE SarkıID = ?";
+        String albumsql="SELECT COUNT(*) AS ŞarkıSayısı FROM TblSarkı WHERE AlbumID = ?"; //silinecek şarkının bulundupu albumdeki şarkı sayısı =1 ise album de direkt silinir;
         PreparedStatement ps=conn.prepareStatement(sql);
         ps.setInt(1,ID);
         ps.executeUpdate();
         LOGGER.info("All Data Deleted successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
-
-
+        conn.commit();
     }
     catch (SQLException e) {
+        conn.rollback();
         e.printStackTrace();
     }
-
-
-
-
 
 }
 

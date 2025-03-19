@@ -5,6 +5,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 //Admin; yeni sanatçı, şarkı ve albüm ekleyebilecek ya da silme güncelleme işlemleri
@@ -15,9 +16,9 @@ import java.util.List;
 
 
 public class AlbumDAO {
+    private static final Logger LOGGER = Logger.getLogger(AlbumDAO.class.getName());
 
-
-        //CREATE album
+        //CREATE album -> bir albumde 1'den fazla şarkı bulunabilir ancak 1 şarkı yanlızca 1 albumde bulunur!
         public static void CreateAlbum(TblAlbum album){
             Connection conn = DataConnection.connect();
             java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih()); //localdate türünde olduğu için;
@@ -42,26 +43,37 @@ public class AlbumDAO {
 
 
 
-       //DELETE album with model Class -> album de foreign key yok silme işlemi basit;
-        public static void DeleteAlbum(TblAlbum album){
+
+
+        public static void DeleteAlbum(TblAlbum album) throws SQLException {
             Connection conn = DataConnection.connect();
             if (conn == null) {
                 System.out.println("The Connection connected failed ! ");
                 return;
             }
-            String sql = "DELETE FROM TblAlbum WHERE AlbumID = ?";
             try {
-                PreparedStatement ps=conn.prepareStatement(sql);
-                ps.setInt(1, album.getId());
-                ps.executeUpdate();
-                System.out.println("The Album have been deleted!");
+                conn.setAutoCommit(false);
+//Ancak şarkılar-> albume bağlı (Çünkü albumde birden fazla şarkı var ancak 1 şarkı sadece 1 albumde oluyor) -> album siliniyorsa şarkıyı da direkt silmeliyiz!
+              //ilişkili veri ->   int AlbumID= album.getId();
+                String songsql= "DELETE FROM TblSarkı WHERE AlbumID = ?";
+                PreparedStatement psSong = conn.prepareStatement(songsql);
+                psSong.setInt(1, album.getId());
+                psSong.executeUpdate();
+                LOGGER.info("Deleted all songs related to TblAlbum  !");
+                String Albumsql = "DELETE FROM TblAlbum WHERE AlbumID = ?";
+                PreparedStatement psAlbum=conn.prepareStatement(Albumsql);
+                psAlbum.setInt(1, album.getId());
+                psAlbum.executeUpdate();
+                LOGGER.info("The Album have been Deleted successfully dependent to Album (Song) !");
+                conn.commit();
             } catch (SQLException e) {
+                conn.rollback();
                 e.printStackTrace();
+                LOGGER.severe(e.getMessage());
             }
-
         }
 
-    //update album with model Class -> NO FOREIGN KEY
+
     public static void UpdateAlbum(TblAlbum album){
         java.sql.Date sqlDate = java.sql.Date.valueOf(album.getTarih());
         //lokal date-> sqldate e dönüştü;
