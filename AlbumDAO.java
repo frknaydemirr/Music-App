@@ -39,8 +39,6 @@ public class AlbumDAO {
 
 
 
-//album silinince -> şarkı direkt silinir
-//şarkı silinince bağlı olan -> tblcalmalistesisarkı ve tblsarkısanatcı da silinir!
         public static void DeleteAlbum(TblAlbum album) throws SQLException {
             Connection conn = DataConnection.connect();
             if (conn == null) {
@@ -106,7 +104,7 @@ public class AlbumDAO {
     }
 
 
-    //album bilgilerini okuyoruz ancak herhangi bir işlem yok -> tabloya dökeceğiz sonrasında; -> size(boyut) la kontrol başarılı bir şekilde sağlanıyor;
+    // -> tabloya dökeceğiz sonrasında;
     public ArrayList<TblAlbum>getSarki(){
         ArrayList<TblAlbum>albumList=new ArrayList<>();
         Connection conn = DataConnection.connect();
@@ -133,9 +131,6 @@ public class AlbumDAO {
         }
 return albumList;
     }
-
-
-
 
     }
 

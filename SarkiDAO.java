@@ -72,8 +72,6 @@ public class SarkiDAO {
     }
 
 
-
-//id-> null erroru alıyoruz dön!
     public static void UpdateSarki(TblSarkı eskiSarki, TblSarkı yeniSarki) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {
@@ -96,14 +94,9 @@ public class SarkiDAO {
                 conn.rollback();
                 return;
             }
-            if(eskiSarki.getId()==null || yeniSarki.getId()==null){
+            if(eskiSarki.getId()==null ){
                 LOGGER.warning("ID is NULL!");
                 return;
-            }
-            if (eskiSarki.getId() != yeniSarki.getId()) {
-                SarkiSantaciDAO.UpdateSarkiSanatci(eskiSarki.getId(), yeniSarki.getId());
-                CalmaListesiSarkiDAO.UpdateCalmaListesiSarki(eskiSarki.getId(), yeniSarki.getId());
-                LOGGER.info("All Data Updated successfully (TblSarkı, TblSarkıSanatcı , TblCalmaListesiSarkı) !");
             }
             String sql = "UPDATE TblSarkı SET SarkıAd = ? , Tarih  = ? , sure = ?, dinlenmeSayi = ? , AlbumID = ? WHERE SarkıID = ? ";
             PreparedStatement ps = conn.prepareStatement(sql);
