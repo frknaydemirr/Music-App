@@ -92,8 +92,9 @@ public class SanatciDAO {
             System.out.println("The Connection connected failed ! ");
             return sanatcilar;
         }
-        String sql="SELECT * FROM TblSanatcı";
+
         try{
+            String sql="SELECT * FROM TblSanatcı";
             PreparedStatement ps=conn.prepareStatement(sql);
             Statement st= conn.createStatement();
             ResultSet rs=st.executeQuery(sql);
