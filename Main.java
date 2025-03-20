@@ -327,6 +327,19 @@ public class Main {
 //dao.UpdateCalmaList(list);
 
 
+        TblKullanıcı kullanici=new TblKullanıcı();
+        KullaniciDAO dao=new KullaniciDAO();
+        kullanici.setKullaniciAd("furkan123456");
+        kullanici.setSifre("123456");
+        TblUlke ulke=new TblUlke();
+        ulke.setId(1);
+        kullanici.setUlkeID(ulke);
+        TblAbonelik abonelik=new TblAbonelik();
+        abonelik.setId(1);
+        kullanici.setAbonelikID(abonelik);
+        dao.createUser(kullanici);
+
+
 
 
 
