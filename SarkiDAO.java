@@ -215,12 +215,6 @@ public static void DeleteSong(TblSarkı sarki) throws SQLException {
 
 
 
-
-
-
-
-
-
     }
 
 

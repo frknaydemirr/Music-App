@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import com.example.musicapp.model.TblCalmaListesi; //buradan foreign key olan CalmaListesi -> id yi alır!
+
 
 
 
@@ -67,7 +67,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
 
 
 
-    //eklenmesi gereken bu tablo -> çalmalistesiyle ilişkilki olduğpu için onu da etkiler değişimleri!!!
+
     public static void UpdateCalmaListesiSarki(TblCalmaListesiSarkı calmaListesiSark){
         Connection conn = DataConnection.connect();
         if(conn==null){
