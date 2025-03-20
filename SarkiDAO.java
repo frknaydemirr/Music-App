@@ -82,7 +82,7 @@ public class SarkiDAO {
         ResultSet rsalbum = null;
         PreparedStatement albumps = null;
         try {
-            String albumsql = "SELECT AlbumID FROM TblAlbum";//olmayan albumu kullanıcı sarkıyı güncelleyeceğinde set etmemeli!
+            String albumsql = "SELECT AlbumID FROM TblAlbum";
             albumps = conn.prepareStatement(albumsql);
             rsalbum = albumps.executeQuery();
             ArrayList<Integer> AlbumIdList = new ArrayList<Integer>();

@@ -9,8 +9,7 @@ import java.util.List;
 
 //kullanıcı ekleme gereksiz oldu-> ancak yeni kayıt alınırsa lazım!
 public class KullaniciDAO {
-    //model class->TBLKullanici;
-    //create->Kullanici->başarılı;
+
     public static void  createUser(TblKullanıcı kullanici){
         Connection conn = DataConnection.connect();
         if(conn == null){

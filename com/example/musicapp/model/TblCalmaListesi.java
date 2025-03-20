@@ -19,6 +19,17 @@ public class TblCalmaListesi {
     @Column(name = "CalmaListesi", nullable = false, length = 250)
     private String calmaListesi;
 
+    public TblCalmaListesi(int CalmaListID, TblKullanıcı kullanici, String muzıkTur, String calmaListesi) {
+        this.calmaListesi = calmaListesi;
+        this.kullaniciID = kullanici;
+        this.muzıkTur=muzıkTur;
+        this.id=CalmaListID;
+    }
+
+    public TblCalmaListesi() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -49,6 +60,14 @@ public class TblCalmaListesi {
 
     public void setCalmaListesi(String calmaListesi) {
         this.calmaListesi = calmaListesi;
+    }
+
+    public String toString() {
+         return "ÇalmaListesi ID: " + id + "\n" +
+                "Kullanıcı ID " + kullaniciID.getId()+ "\n" +
+                "Müzik Tür: " + muzıkTur + "\n" +
+                "Çalma Listesi: " + calmaListesi ;
+
     }
 
 
