@@ -138,6 +138,13 @@ public static void CreateCalmaListesi(TblCalmaListesi CalmaListesi ) throws SQLE
             return;
         }
         try {
+            String calmalistSarkıSql="DELETE FROM TblCalmaListesiSarkı WHERE CalmaListesiID = ?";
+            PreparedStatement clmlstsarkips=conn.prepareStatement(calmalistSarkıSql);
+            clmlstsarkips.setInt(1,calmaListesi.getId());
+
+
+
+            //çalmalistesi->çalmalistesişarkı ile ilişkili önce çalmalistesişarkıyı silcem:
             String sql= "DELETE FROM TblCalmaListesi WHERE CalmaListesiID = ?";
             PreparedStatement ps= conn.prepareStatement(sql);
             ps.setInt(1,calmaListesi.getId());
@@ -153,6 +160,9 @@ public static void CreateCalmaListesi(TblCalmaListesi CalmaListesi ) throws SQLE
 
     }
 
+    }
 
 
-}
+
+
+
