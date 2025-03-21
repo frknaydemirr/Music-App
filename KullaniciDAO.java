@@ -39,13 +39,15 @@ public class KullaniciDAO {
             ResultSet rsabonelik = abonelik.executeQuery();
             ArrayList<Integer>abonelikID=new ArrayList<>();
             while(rsabonelik.next()){
-                abonelikID.add(rsabonelik.getInt("AbonelikID"));
+                abonelikID.add(rsabonelik.getInt(1));
             }
-            if(!abonelikID.contains(kullanici.getAbonelikID())){
+            if(!abonelikID.contains(kullanici.getAbonelikID().getId())){
                 LOGGER.warning("Invalid Abonelik ID");
                 conn.rollback();
                 return;
             }
+            String[]MuzikList={"Pop","Jazz","Klasik"}; //yeni oluşturulan kullancılara otomatik bir şekilde 3 tür müzik çL ye eklenmeli!
+
             String sql="INSERT INTO TblKullanıcı (kullaniciAd,Email,Sifre,UlkeID,AbonelikID) VALUES (?,?,?,?,?)";
             PreparedStatement ps= conn.prepareStatement(sql);
             ps.setString(1, kullanici.getKullaniciAd());
