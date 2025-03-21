@@ -124,7 +124,7 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
 
 
 
-
+//Delete with SarkıID
     public static void DeleteCalmaListesiSarki(int sarkiID) throws SQLException {
         Connection conn = DataConnection.connect();
         if (conn == null) {
@@ -135,6 +135,28 @@ private static final Logger LOGGER = Logger.getLogger(CalmaListesiSarkiDAO.class
         try {
             PreparedStatement ps=conn.prepareStatement(sql);
             ps.setInt(1,sarkiID);
+            ps.executeUpdate();
+            System.out.println("The songlist has been deleted!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error while deleting!");
+            conn.close();
+        }
+
+    }
+
+
+    //Delete with CalmalistesiID
+    public static void DeleteCalmaListesiSarkiWithListId(int calmalistesiID) throws SQLException {
+        Connection conn = DataConnection.connect();
+        if (conn == null) {
+            System.out.println("Veritabanı bağlantısı başarısız!");
+            return;
+        }
+        String sql= "DELETE FROM TblCalmaListesiSarkı WHERE CalmalistesiID = ?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ps.setInt(1,calmalistesiID);
             ps.executeUpdate();
             System.out.println("The songlist has been deleted!");
         } catch (SQLException e) {

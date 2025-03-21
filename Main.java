@@ -327,18 +327,19 @@ public class Main {
 //dao.UpdateCalmaList(list);
 //
 //
-        TblKullanıcı kullanici=new TblKullanıcı();
-        KullaniciDAO dao=new KullaniciDAO();
-        kullanici.setKullaniciAd("aliati_3232");
-        kullanici.setSifre("157515");
-        kullanici.setEmail("atillaali21@gmail.com");
-        TblUlke ulke=new TblUlke();
-        ulke.setId(2);
-        kullanici.setUlkeID(ulke);
-        TblAbonelik abonelik=new TblAbonelik();
-        abonelik.setId(1);
-        kullanici.setAbonelikID(abonelik);
-        dao.createUser(kullanici);
+//        TblKullanıcı kullanici=new TblKullanıcı();
+//        KullaniciDAO dao=new KullaniciDAO();
+//        kullanici.setKullaniciAd("aliati_3232");
+//        kullanici.setSifre("157515");
+//        kullanici.setEmail("atillaali21@gmail.com");
+//        TblUlke ulke=new TblUlke();
+//        ulke.setId(2);
+//        kullanici.setUlkeID(ulke);
+//        TblAbonelik abonelik=new TblAbonelik();
+//        abonelik.setId(1);
+//        kullanici.setAbonelikID(abonelik);
+//        dao.createUser(kullanici);
+
 
 
 

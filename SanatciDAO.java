@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//sanatcı işlemleri hem tblUlke ile ilişkili hem de TblSarkıSanatcı ile;
+
 
 
 public class SanatciDAO {
 
-//UlkeID-> foreign key mevcut buraya dikkat!
-    //CREATE Sanatcı
+
+
     public static void CreateSanatci(TblSanatcı sanatci){
         Connection conn = DataConnection.connect();
         if (conn == null) {
@@ -36,7 +36,7 @@ public class SanatciDAO {
     }
 
 
-    //DELETE SANATCI -> Dikkat primary key mevcut->UlkeID
+
     public static void DeleteSanatci(TblSanatcı sanatci){
         Connection conn = DataConnection.connect();
         if (conn == null) {

@@ -73,7 +73,7 @@ public class KullaniciDAO {
                 pslist.executeUpdate();
                 System.out.println("Kullanıcı Bilgiler : \n"+"KullanıcıID:"+kullanici_ID+"\tMüzik Tür: "+MuzikList[i]);
             }
-            System.out.println("User have been created with calmaList!");
+            LOGGER.info("User have been created with calmaList [relation->dafeault]!");
             conn.commit();
         } catch (Exception e) {
             System.out.println("error occurred while creating user!");
@@ -125,11 +125,51 @@ public class KullaniciDAO {
             e.printStackTrace();
         }
     }
+
+    public static void  DeleteUser(TblKullanıcı kullanici) throws SQLException {
+        Connection conn = DataConnection.connect();
+        if(conn == null){
+            System.out.println("The Connection connected failed ! ");
+            return;
+        }
+        try {
+            conn.setAutoCommit(false);
+            String calmalistesisarkips="SELECT "; //devam...
+
+
+
+
+            String calmaListID="SELECT CalmaListesiID from TblCalmaListesi  WHERE KullaniciID = ?";
+            PreparedStatement ps = conn.prepareStatement(calmaListID);
+            ps.setInt(1, kullanici.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int CalmaListesiID = rs.getInt(1);
+                TblCalmaListesi calmaListesi = new TblCalmaListesi();
+                calmaListesi.setId(CalmaListesiID);
+                CalmaListesiDAO dao = new CalmaListesiDAO();
+                dao.DeleteCalmaList(calmaListesi);
+
+            }
+
+
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     }
 
 
 
 
 //Kullanıcı silindiğinde, onun çalma listeleri ve takip ilişkileri de silinmelidir. -> aynı album gibi;
+
+
 
 

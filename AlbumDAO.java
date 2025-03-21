@@ -47,7 +47,7 @@ public class AlbumDAO {
             }
             try {
                 conn.setAutoCommit(false);
-                String sarkiID="SELECT SarkıID from TblSarkı  WHERE AlbumID = ? "; //albumlerin içindeki şarkıların ID sini çektik;
+                String sarkiID="SELECT SarkıID from TblSarkı  WHERE AlbumID = ? ";
                 PreparedStatement psSarki = conn.prepareStatement(sarkiID);
                 psSarki.setInt(1, album.getId());
                 ResultSet rsSarki = psSarki.executeQuery(); //sarkıID leri depoladık
