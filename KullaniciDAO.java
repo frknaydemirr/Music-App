@@ -12,8 +12,25 @@ import java.util.logging.Logger;
 
 public class KullaniciDAO {
     private  static final Logger LOGGER = Logger.getLogger(KullaniciDAO.class.getName());
+    public boolean odendi_mi = false;
 
-    //REGISTER USER && CREATE NEW USER -> dön!
+
+
+
+
+
+    //Giriş Yapma metodunu buraya -> GUI de buton click eventiyle bilgiler buradan çekilsin veritabanındaki;
+
+
+
+
+
+
+
+
+
+
+
     public static void  createUser(TblKullanıcı kullanici) throws SQLException {
         Connection conn = DataConnection.connect();
         if(conn == null){
@@ -89,17 +106,6 @@ public class KullaniciDAO {
 
 
 
-//Giriş Yapma metodunu buraya -> GUI de buton click eventiyle bilgiler buradan çekilsin veritabanındaki;
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -126,6 +132,11 @@ public class KullaniciDAO {
         }
     }
 
+
+//kontrol bloğı oluştur -> if (kullanıcıAbonelikID==1 [Preminyum] -> kullanıcının ödeme bilgisini de sil ->  TblOdeme ile ilişkisini kur burdan ;]
+    //Kullanıcı silindiğinde, onun çalma listeleri ve takip ilişkileri de silinmelidir. --> önce
+    //eğer kullanıcı çalmalistesişarkıya şarkı eklediyse -> bunu da silmeliyiz -> sonra çalmalistesini sonra da kullanıcıyı-> kullanıcı preminum ise ödeme bilgisini de silmeliyiz!
+    //Kullanıcının takip ettiği ve onu takip eden kayıtları da silmeliyiz!
     public static void  DeleteUser(TblKullanıcı kullanici) throws SQLException {
         Connection conn = DataConnection.connect();
         if(conn == null){
@@ -163,12 +174,19 @@ public class KullaniciDAO {
 
     }
 
+    public Boolean getOdendi_mi() {
+        return odendi_mi;
     }
 
+    public void setOdendi_mi(Boolean odendi_mi) {
+        this.odendi_mi = odendi_mi;
+    }
+}
 
 
 
-//Kullanıcı silindiğinde, onun çalma listeleri ve takip ilişkileri de silinmelidir. -> aynı album gibi;
+
+
 
 
 
