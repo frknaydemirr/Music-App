@@ -1,23 +1,23 @@
-# Müzik Yönetim Sistemi
-Kullanıcıların müzik dinleyebileceği, çalma listeleri oluşturabileceği ve Premium kullanıcıları takip edebileceği bir masaüstü uygulamasıdır. 
-Kullanıcı yönetimi, müzik çalma listeleri ve bir yönetici paneli gibi modülleri içerir. Nesne yönelimli programlama (OOP) 
-prensiplerine göre tasarlanan bu proje, veritabanı normalizasyonu ve ilişkisel veritabanı yönetimi kavramlarını uygular.
+# Music Management System
+A desktop application where users can listen to music, create playlists, and follow Premium users.
+It includes modules such as user management, music playlists, and an admin panel.
+This project is designed according to object-oriented programming (OOP) principles and applies database normalization and relational database management concepts.
 
-## Veritabanı Diyagramı
+## Database Diagram
 ![Ekran görüntüsü 2025-03-09 235040](https://github.com/user-attachments/assets/a2638046-56b3-4044-9ec5-d631e1ae6009)
 
-## Loglama ve Hata Kontrol Mekanizmaları
+## Logging and Error Handling Mechanisms
 
-Projeye entegre edilen loglama ve hata kontrol mekanizmaları sayesinde, uygulamanın çalışma sürecinde meydana gelen olaylar, hata durumları ve veri işlemleri detaylı bir şekilde takip edilebilmektedir.
+Thanks to the integrated logging and error handling mechanisms in the project, events, error situations, and data operations occurring during the application's execution can be monitored in detail.
 
-İlişkisel veritabanı işlemlerinde gerçekleşen tüm önemli olaylar kaydedilmekte olup, özellikle silme (DELETE), ekleme (INSERT) ve güncelleme (UPDATE) gibi kritik işlemler loglanarak sistemin güvenilirliği
-artırılmaktadır. Silme işlemlerinde, ilgili bağımlı kayıtların da başarıyla kaldırıldığını doğrulayan log mesajları oluşturulmaktadır.
+All important events in relational database operations are recorded, and especially critical operations such as deletion (DELETE), insertion (INSERT), and updating (UPDATE) are logged to enhance the system's reliability.
+In deletion operations, log messages are generated to confirm that related dependent records have also been successfully removed.
 
-Bağlantı sorunları, veri tutarsızlıkları ve işlem hataları, loglar üzerinden analiz edilerek hata ayıklama süreci kolaylaştırılmaktadır. Hata logları, belirli bir formatta saklanarak, sistemde meydana
-gelen beklenmeyen durumların incelenmesine olanak tanımaktadır.
+Connection issues, data inconsistencies, and transaction errors are analyzed through logs, facilitating the debugging process.
+Error logs are stored in a specific format, allowing the examination of unexpected situations that occur in the system.
 
-Ayrıca, veritabanı işlemlerinin sorunsuz ve tutarlı bir şekilde gerçekleşmesini sağlamak için transaction yapısı kullanılmıştır. Bu sayede, ilişkili kayıtların senkronize çalışması sağlanarak veri
-bütünlüğü korunmuş ve olası hatalara karşı hızlı müdahale imkânı sunulmuştur.
+Additionally, a transaction structure has been used to ensure that database operations are carried out smoothly and consistently.
+This ensures the synchronization of related records, maintains data integrity, and enables rapid response to potential errors.
 
 ![image](https://github.com/user-attachments/assets/80d6b685-4260-4d15-81e8-1b11ddcbd4dd)
 
