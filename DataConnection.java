@@ -1,18 +1,16 @@
 import java.sql.*;
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 public class DataConnection {
 
-    private static final String DB_URL = "jdbc:sqlserver://DESKTOP-PIQ3E57;databaseName=MusicFile;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
-    private static final String USER = "sa";
-    private static final String PASSWORD = "12345";
+    //My JDBC URL is 'jdbc:sqlserver://[host]:1433;databaseName=[database name]'
+    //DESKTOP-798VB1N\MSSQLSERVERDEV
+    private static final String DB_URL = "jdbc:sqlserver://DESKTOP-798VB1N;databaseName=MusicFile;integratedSecurity=true;encrypt=true;trustServerCertificate=true";
+    //private static final String USER = "sa";
+    //private static final String PASSWORD = "12345";
     private static Connection conn;
 
     public static Connection connect() {
         try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            conn = DriverManager.getConnection(DB_URL);
             System.out.println("The Connection connected succesfuly ! ");
             return conn;
 
